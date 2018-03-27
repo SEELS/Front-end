@@ -1,0 +1,59 @@
+*
+{
+	margin:0px;
+	padding: 0px;
+}
+#map 
+{
+	height: 91vh;
+	width: 70%;
+	float: left;
+}
+
+html, body 
+{
+	height: 100%;
+    margin: 0;
+    padding: 0;
+}
+    
+aside, h3
+{
+	height:40%;
+	width: 30%;
+	display: inline;
+	margin:10px;
+}
+
+.truckId , label
+{
+	margin-left: 15px;
+}
+
+#activeTrucks
+{
+	height: 40%;
+}
+
+#truckDetails
+{
+	height: 50%;
+}
+
+nav
+{
+	width: 94.85%;
+	background-color: rgb(70,150 ,250);
+	text-align: right;
+	height:4%;
+	padding: 20px;
+	padding-right: 50px;
+}
+
+a
+{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	margin-left: 50px;
+}

@@ -1,0 +1,53 @@
+*
+{
+	padding: 0px;
+	margin: 0px;
+}
+
+
+nav
+{
+	width: 94.85%;
+	background-color: rgb(70,150 ,250);
+	text-align: right;
+	height:4%;
+	padding: 20px;
+	padding-right: 50px;
+}
+
+a
+{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	margin-left: 50px;
+}
+
+select
+{
+	display: block;
+	border-radius: 5px;
+	width: 150px;
+	height: 25px;
+	margin: 50px auto ;
+
+
+}
+
+#input
+{
+	width: 50%;
+	height: 91vh;
+	float: left;
+	border-right-style: solid;
+	border-right-color: rgb(70,150 ,250);
+	border-right-width: 3px; 
+}
+
+#display
+{
+	width: 49%;
+	height: 70%;
+	float: left;
+}
+

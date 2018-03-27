@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="css/mapStyle.css">	  
+  
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
+ 
+
+  </head>
+  <body  ng-app="trucksController" ng-controller="trucksController">
+    
+	  	<nav>
+	  		<a href="Dashboard.html">Dashboard</a>
+	  		<a href="AddTrip.html">Add Trip</a>
+	  		<a href="index.html">Logout</a>
+	  	</nav>
+
+		<div id="map"></div>
+		
+		<aside>
+			<div id="activeTrucks" ng-init="getActiveTrucks()">
+				
+				<h3>Active Trucks</h3>
+				<div ng-repeat="truck in trucks" ng-click="getTruckData(truck.id)" onclick='showSpecificTruck(truck.id)'>
+					<label class="truckId"> {{truck.id}} </label>
+				</div>
+				
+			</div>
+			
+			<div id="truckDetails">
+				
+				<h3 class="header">Selected Truck</h3>
+				<br>
+				<label>{{selectedTruck.id}}<br>
+				<label>Speed: </label>{{selectedTruck.current}}<label>KPH</label><br>
+				<h3 class="header">Driver</h3><br>
+				<label>{{selectedTruck.driver.name}}</label><br>
+				<label>{{selectedTruck.driver.ssn}}</label><br>
+				<label>{{selectedTruck.driver.rating}}</label><br>
+							
+			</div>
+			
+			
+		</aside>
+		
+		<script src="js/angular.min.js"></script>
+		<script src="js/mapScript.js" ></script>	
+		<script src="js/mapController.js"></script>
+		
+  	</body>
+
+</html>
