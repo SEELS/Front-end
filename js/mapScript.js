@@ -55,7 +55,6 @@ function changeMarkerPosition(marker, lat, lng) {
 }
 
 function initMap() {
-	
 	markers=[];
 	flightPath=[];
 	flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates for each truck
@@ -73,7 +72,7 @@ function initMap() {
 
 function getPosition(truckId) {
 
-	$.get("http://localhost:8080/viewTruckLocation/" + truckId, function(response) {
+	$.get("http://localhost:8080/viewTruckLocation/" + truckId).then (function(response) {
 		data = response;
 		latitude[truckId] = data.lat;
 		longitude[truckId] = data.lon;
@@ -102,19 +101,38 @@ function showActiveTrucks(trucks)
  	for( i=0; i<trucks.length ; i++)
 	{
 		addMarker(new google.maps.LatLng(trucks[i].latitude , trucks[i].longitude) ,trucks[i].id);
-		console.log("trip: "+getTrip(trucks[i].id));
-		getRoad(getTrip(trucks[i].id));
+		//var temp = getTrip(trucks[0].id);
+		//alert("Temp:  " + temp);
+		//getRoad(temp);
+		getTripRoad(trucks[0].id);
 		longitude[trucks[i].id] = trucks[i].longitude;
 		latitude[trucks[i].id] = trucks[i].latitude;
 	}
 
 	var myVar = setInterval(function(){
-		for (i=0 ; i<trucks.length; i++)
+		for (var i=0 ; i<trucks.length; i++)
 		{
 			var x = trucks[i].id ;
 			updatePath(x, flightPath[x]);
 		}
 	}, 1000);
+	
+	/*var accidentCheck = setInterval(function(){
+		for (var i=0 ; i<trucks.length; i++)
+		{
+			for (var j=0 ; j<trucks.length; j++)
+			{
+				if (i==j)
+					continue;
+				 $.get('http://localhost:8080/'+trucks[i].id+'/'+trucks[j].id+'/changeInSpeed/').then(function(reponse){
+					if (response == true) 
+						alert("Possible Accident for Trucks: " + trucks[i].id + ", " + trucks[j].id);
+				 });
+			}			
+		}
+	}, 10000);
+	*/
+	
 
 }
 
@@ -146,28 +164,36 @@ function highlightRoad(road)
 	});
 	roadFlightPath.setMap(map);
 }
-
+/*
 function getRoad(tripId)
 {
-	console.log('url : http://localhost:8080/getRoad/'+tripId);
+	alert("Road: " + tripId);
 	$.get('http://localhost:8080/getRoad/'+tripId).then(function(response)
 	{
 		var road = response;
-		highlightRoad(road)
-		//for(var i = 0;i< roads.length; i++)
-		//{
-			//highlightRoad(roads[i]);
-		//}
+		highlightRoad(road);
+		alert("Done");
 	});
 }
 
 function getTrip(id)
 {
-			console.log(55555555555555555);
-
-	$.get('http://localhost:8080/'+id+'/getCurrentTrip/').then(function(response)
+	alert("ID: " + id);
+	$.get('http://localhost:8080/'+id+'/getTruckTrip/').then(function(response)
 	{
-		console.log(response);
-		return response.trip_id;
+		alert("tesp: " + response);
+		return response;
+	});
+}
+*/
+function getTripRoad(id)
+{
+	$.get('http://localhost:8080/'+id+'/getTruckTrip/').then(function(response)
+	{
+		$.get("http://localhost:8080/getRoad/" + response).then(function(response2)
+		{
+			var road = response2;
+			highlightRoad(road);
+		});
 	});
 }
