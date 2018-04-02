@@ -29,15 +29,29 @@ select
 	border-radius: 5px;
 	width: 150px;
 	height: 25px;
-	margin: 50px auto ;
+	margin: 20px auto ;
 
 
+}
+
+#crudAction
+{
+	margin-top: 50px;
+}
+
+#go
+{
+	border-radius: 5px;
+	width: 60px;
+	height: 25px;
+	position: relative;
+	left: 450px;
 }
 
 #input
 {
 	width: 50%;
-	height: 91vh;
+	height: 90vh;
 	float: left;
 	border-right-style: solid;
 	border-right-color: rgb(70,150 ,250);
@@ -51,3 +65,24 @@ select
 	float: left;
 }
 
+#inputFields
+{
+	width: 300px;
+	margin: 50px auto ;
+}
+
+input[type="text"]
+{
+	border-radius: 5px;
+	width: 150px;
+	height: 25px;
+	margin: 10px auto ;
+}
+
+input[type="submit"]
+{
+	border-radius: 5px;
+	width: 60px;
+	height: 25px;
+	margin: 20px auto ;
+}

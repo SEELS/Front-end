@@ -4,6 +4,8 @@
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="css/DashboardStyle.css">	  
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/DashboardScript.js"></script>
   
   </head>
   <body>
@@ -15,22 +17,89 @@
 	  	</nav>
 
 	  	<section id="input">
-		  	<select name="crudAction">
+		  	<select name="crudAction" id="crudAction">
 		  		<option name="add">Add</option>
 		  		<option name="delete">Delete</option>
-		  		<option name="update">Update</option>
 		  	</select>
-
-		  	<select name="object">
+		  	<button id="go">Go</button>
+		  	<select name="object"  id="object">
 		  		<option name="truck">Truck</option>
 		  		<option name="driver">Driver</option>
 		  		<option name="goods">Goods</option>
 		  	</select>
+
+		  	<div id="inputFields">
+		  		<form>
+				<div id="addTruck" style="display: none;" class="formContents">
+					<label>Truck ID:</label> 
+					<input type="text" name="truckID">
+					<br>
+					<input type="submit" value="Add">
+				</div>
+
+				<div id="addDriver" style="display: none;" class="formContents">
+					<label>Driver ID:</label> 
+					<input type="text" name="driverID">
+					<br>
+					<label>Driver Name:</label> 
+					<input type="text" name="driverName">
+					<br>
+					<label>Driver Password:</label> 
+					<input type="text" name="driverPassword">
+					<br>
+					<input type="submit" value="Add">
+				</div>
+				
+				<div id="addGood" style="display: none;" class="formContents">
+					<label>Barcode: </label> 
+					<input type="text" name="barcode">
+					<br>
+					<label>Name:</label> 
+					<input type="text" name="goodName">
+					<br>
+					<label>Company:</label> 
+					<input type="text" name="company">
+					<br>
+					<label>Date: </label>
+					<input type="date" name="date">
+					<br>
+					<label>Available Number: </label>
+					<input type="Number" name="numGoods">
+					<br>
+					<input type="submit" value="Add">
+				</div>
+
+				<div id="deleteTruck" style="display: none;" class="formContents">
+					<label>Truck ID:</label> 
+					<input type="text" name="truckID">
+					<br>
+					<input type="submit" value="Delete">
+				</div>
+
+				<div id="deleteDriver" style="display: none;" class="formContents">
+					<label>Driver ID:</label> 
+					<input type="text" name="driverID">
+					<br>
+					<input type="submit" value="Delete">
+				</div>
+
+				<div id="deleteGood" style="display: none;" class="formContents">
+					<label>Good Name:</label> 
+					<input type="text" name="goodName">
+					<br>
+					<input type="submit" value="Delete">
+				</div>
+
+				</form>
+			</div>
+
 		</section>
 
 		<section id="display">
-			
+		
 		</section>
+
+		
 
   </body>
 </html>
