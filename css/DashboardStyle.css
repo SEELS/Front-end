@@ -71,7 +71,7 @@ select
 	margin: 50px auto ;
 }
 
-input[type="text"]
+input[type="text"], input[type="number"],input[type="date"]
 {
 	border-radius: 5px;
 	width: 150px;

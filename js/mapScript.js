@@ -63,7 +63,7 @@ function initMap() {
 	
 	var mapOptions = {
 		center: new google.maps.LatLng(30.06263, 31.24967),
-		zoom: 3,
+		zoom: 10,
 		mapTypeId : 'terrain'
 	}
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
@@ -117,22 +117,24 @@ function showActiveTrucks(trucks)
 		}
 	}, 1000);
 	
-	/*var accidentCheck = setInterval(function(){
+	var accidentCheck = setInterval(function(){
 		for (var i=0 ; i<trucks.length; i++)
 		{
 			for (var j=0 ; j<trucks.length; j++)
 			{
 				if (i==j)
 					continue;
-				 $.get('http://localhost:8080/'+trucks[i].id+'/'+trucks[j].id+'/changeInSpeed/').then(function(reponse){
+				
+				var id1 = trucks[i].id ;
+				var id2 = trucks[j].id;
+				
+				$.get('http://localhost:8080/'+id1+'/'+id2+'/changeInSpeed/').then(function(response){
 					if (response == true) 
-						alert("Possible Accident for Trucks: " + trucks[i].id + ", " + trucks[j].id);
+						alert("Possible Accident for Trucks: " + id1 + ", " + id2);
 				 });
 			}			
 		}
 	}, 10000);
-	*/
-	
 
 }
 
