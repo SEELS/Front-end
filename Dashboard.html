@@ -11,7 +11,7 @@
   <body>
     
   		<nav>
-	  		<a href="Dashboard.html">Dashboard</a>
+	  		<a href="Map.html">Map</a>
 	  		<a href="AddTrip.html">Add Trip</a>
 	  		<a href="index.html">Logout</a>
 	  	</nav>
@@ -29,25 +29,24 @@
 		  	</select>
 
 		  	<div id="inputFields">
-		  		<form>
 				<div id="addTruck" style="display: none;" class="formContents">
 					<label>Truck ID:</label> 
 					<input type="text" name="truckID">
 					<br>
-					<input type="submit" value="Add">
+					<button value="Add">Add</button>
 				</div>
 
 				<div id="addDriver" style="display: none;" class="formContents">
-					<label>Driver ID:</label> 
+					<label>Driver SSN:</label> 
 					<input type="text" name="driverID">
 					<br>
 					<label>Driver Name:</label> 
 					<input type="text" name="driverName">
 					<br>
 					<label>Driver Password:</label> 
-					<input type="text" name="driverPassword">
+					<input type="Password" name="driverPassword">
 					<br>
-					<input type="submit" value="Add">
+					<button value="Add">Add</button>
 				</div>
 				
 				<div id="addGood" style="display: none;" class="formContents">
@@ -66,31 +65,30 @@
 					<label>Available Number: </label>
 					<input type="Number" name="numGoods">
 					<br>
-					<input type="submit" value="Add">
+					<button value="Add">Add</button>
 				</div>
 
 				<div id="deleteTruck" style="display: none;" class="formContents">
 					<label>Truck ID:</label> 
 					<input type="text" name="truckID">
 					<br>
-					<input type="submit" value="Delete">
+					<button value="Delete">Delete</button>
 				</div>
 
 				<div id="deleteDriver" style="display: none;" class="formContents">
 					<label>Driver ID:</label> 
 					<input type="text" name="driverID">
 					<br>
-					<input type="submit" value="Delete">
+					<button value="Delete">Delete</button>
 				</div>
 
 				<div id="deleteGood" style="display: none;" class="formContents">
 					<label>Good Name:</label> 
 					<input type="text" name="goodName">
 					<br>
-					<input type="submit" value="Delete">
+					<button value="Delete">Delete</button>
 				</div>
 
-				</form>
 			</div>
 
 		</section>

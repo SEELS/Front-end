@@ -1,5 +1,63 @@
 $(document).ready(function(){
 
+	var domain = "seelsapp.herokuapp.com/";
+	function showDrivers()
+	{
+		$.get(domain+'getAllDrivers/').then(function(response)
+		{
+			var arr = response ;
+			var text = "" ;
+			$("#display").html("");
+			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>SSN</th><th>Rate</th></tr>" ;
+			for (var i=0 ; i< arr.length ; i++)
+			{
+				text += "<tr><td>"+arr[i].driver_id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].ssn + "</td><td>"  + arr[i].rate + "</td></tr>" ; 
+			}
+			text += "</table>";
+			$("#display").html(text);
+		});	
+	}
+	
+	function showTrucks()
+	{
+		$.get(domain+'getAllTrucks/').then(function(response)
+		{
+			var arr = response ;
+			var text = "" ;
+			$("#display").html("");
+			var text = "<table><tr><th>Truck ID</th><th>Current Speed</th><th>Driver ID</th><th>Name</th><th>Rate</th></tr>" ;
+			for (var i=0 ; i< arr.length ; i++)
+			{
+				if (arr[i].driver)
+				text += "<tr><td>" + arr[i].id + "</td><td>" + arr[i].currentSpeed + "</td><td>"+arr[i].driver.driver_id + "</td><td>" 
+						+arr[i].driver.name + "</td><td>" + arr[i].driver.rate + "</td></tr>" ; 
+				else
+				{
+					text += "<tr><td>" + arr[i].id + "</td><td>" + arr[i].currentSpeed + "</td><td>-</td><td>-</td><td>-</td></tr>" ; 	
+				}
+			}
+			text += "</table>";
+			$("#display").html(text);
+		});			
+	}
+	
+	function showGoods()
+	{
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 	$("#go").click(function(){
 		
 		var url = "" ;
@@ -10,11 +68,11 @@ $(document).ready(function(){
 
 		if (crudAction == "Add" && object == "Truck"){
 			$("#addTruck").show();
-			url = "showAllTrucks/" ;
+			url = "getAllTrucks/" ;
 		}
 		else if (crudAction == "Add" && object == "Driver"){
 			$("#addDriver").show();
-			url = "showAllDrivers/" ;
+			url = "getAllDrivers/" ;
 		}
 		else if (crudAction == "Add" && object == "Goods"){
 			$("#addGood").show();
@@ -22,91 +80,111 @@ $(document).ready(function(){
 		}
 		else if (crudAction == "Delete" && object == "Truck"){
 			$("#deleteTruck").show();
-			url = "showAllTrucks/" ;
+			url = "getAllTrucks/" ;
 		}
 		else if (crudAction == "Delete" && object == "Driver"){
 			$("#deleteDriver").show();
-			url = "showAllDrivers/" ;
+			url = "getAllDrivers/" ;
 		}
 		else if (crudAction == "Delete" && object == "Goods"){
 			$("#deleteGood").show();
 			url = "showAllGoods/" ;
 		}
 
-		
-		$.get('http://localhost:8080/'+url).then(function(response)
-		{
-			var text = "" ;
-			var arr = response ;
-			for (var i=0 ; i<arr.length() ; i++)
-			{
-				text += arr[i] + "<br>" ;
-			}
-			$("#display").html(text);
-		});
+		var text = "";
+		if (url == "showAllGoods/")
+			text = showGoods();
+		else if  (url == "getAllDrivers/")
+			text = showDrivers();
+		else 
+			text = showTrucks();
 	});
 
 
-	$("#addTruck>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/addTruck/'+$('#addTruck>input[name="truckID"]').val()).then(function(response)
+	$("#addTruck>button").click(function(){
+		$.get(domain+$('#addTruck>input[name="truckID"]').val()+"/saveTruck").then(function(response)
 		{
-			if (response == true)
+			if (response.Success)
+			{	
 				alert("Truck Added Successfully") ;
+				$("input[type='text']").val("");
+				showTrucks();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
 
-	$("#deleteTruck>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/deleteTruck/'+$('#deleteTruck>input[name="truckID"]').val()).then(function(response)
+	$("#deleteTruck>button").click(function(){
+		$.get(domain+'deleteTruck/'+$('#deleteTruck>input[name="truckID"]').val()).then(function(response)
 		{
-			if (response == true)
+			if (response.Success)
+			{
 				alert("Truck Deleted Successfully") ;
+				$("input[type='text']").val("");
+				showTrucks();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
-
-	$("#addDriver>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/addDriver/'+$('#addDriver>input[name="driverID"]').val()+"/" +
-			  $('#addDriver>input[name="driverName"]').val()+"/" + $('#addDriver>input[name="driverPassword"]').val()).then(function(response)
+	 
+	$("#addDriver>button").click(function(e){
+		
+		$.get(domain+ $('#addDriver>input[name="driverName"]').val()+"/"+ $('#addDriver>input[name="driverID"]').val()+"/" +
+			 + $('#addDriver>input[name="driverPassword"]').val()+"/saveDriver").then(function(response)
 		{
-			if (response == true)
+			if (response.Success)
+			{
 				alert("Driver Added Successfully") ;
+				$("input[type='text']").val("");
+				showDrivers();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
 
-	$("#deleteDriver>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/deleteDriver/'+$('#deleteDriver>input[name="driverID"]').val()).then(function(response)
+	$("#deleteDriver>button").click(function(){
+		$.get(domain+'deleteDriver/'+$('#deleteDriver>input[name="driverID"]').val()).then(function(response)
 		{
-			if (response == true)
-				alert("Driver Deleted Successfully") ;
+			if (response.Success)
+			{	alert("Driver Deleted Successfully") ;
+				$("input[type='text']").val("");
+				showDrivers();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
 
-	$("#addGood>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/addGood/'+$('#addGood>input[name="barcode"]').val()+"/" +
+	$("#addGood>button").click(function(){
+		$.get(domain+'addGood/'+$('#addGood>input[name="barcode"]').val()+"/" +
 			  $('#addGood>input[name="goodName"]').val()+"/" + $('#addGood>input[name="company"]').val()+
 			  $('#addGood>input[name="date"]').val()+"/" + $('#addGood>input[name="numGoods"]').val()).then(function(response)
 		{
-			if (response == true)
+			if (response.Success)
+			{
 				alert("Good Added Successfully") ;
+				$("input[type='text']").val("");
+				showGoods();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
 
-	$("#deleteGood>input[type='submit']").click(function(){
-		$.get('http://localhost:8080/deleteGood/'+$('#deleteGood>input[name="goodName"]').val()).then(function(response)
+	$("#deleteGood>button").click(function(){
+		$.get(domain+'deleteGood/'+$('#deleteGood>input[name="goodName"]').val()).then(function(response)
 		{
-			if (response == true)
+			if (response.Success)
+			{
 				alert("Good Deleted Successfully") ;
+				$("input[type='text']").val("");
+				showGoods();
+			}
 			else
-				alert("Error, Please Try again!");
+				alert(response.Error);
 		});
 	});
 });

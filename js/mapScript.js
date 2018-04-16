@@ -1,3 +1,4 @@
+var domain = "seelsapp.herokuapp.com/";
 var map ;
 var markers=[];
 var flightPath=[];
@@ -72,8 +73,8 @@ function initMap() {
 
 function getPosition(truckId) {
 
-	$.get("http://localhost:8080/viewTruckLocation/" + truckId).then (function(response) {
-		data = response;
+	$.get(domain+"viewTruckLocation/" + truckId).then (function(response) {
+		data = response.Success;
 		latitude[truckId] = data.lat;
 		longitude[truckId] = data.lon;
 	});
@@ -97,6 +98,8 @@ function updatePath(truckId) {
 function showActiveTrucks(trucks)
 {
 	initMap();
+	if (trucks.length == 0)
+		return;
 	trips=[];
  	for( i=0; i<trucks.length ; i++)
 	{
@@ -128,8 +131,8 @@ function showActiveTrucks(trucks)
 				var id1 = trucks[i].id ;
 				var id2 = trucks[j].id;
 				
-				$.get('http://localhost:8080/'+id1+'/'+id2+'/changeInSpeed/').then(function(response){
-					if (response == true) 
+				$.get(domain+id1+'/'+id2+'/changeInSpeed/').then(function(response){
+					if (response.Success) 
 						alert("Possible Accident for Trucks: " + id1 + ", " + id2);
 				 });
 			}			
@@ -190,11 +193,11 @@ function getTrip(id)
 */
 function getTripRoad(id)
 {
-	$.get('http://localhost:8080/'+id+'/getTruckTrip/').then(function(response)
+	$.get(domain+id+'getTruckTrip/').then(function(response)
 	{
-		$.get("http://localhost:8080/getRoad/" + response).then(function(response2)
+		$.get(domain+"getRoad/" + response.Success).then(function(response2)
 		{
-			var road = response2;
+			var road = response2.Success;
 			highlightRoad(road);
 		});
 	});

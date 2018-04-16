@@ -2,6 +2,7 @@ var app = angular.module("trucksController",[]);
 
 app.controller("trucksController",function($scope,$http , $q  ){
 
+		var domain = "seelsapp.herokuapp.com/";
 		var done = false; 
 		var truckArr = [];
 		var location ;
@@ -19,9 +20,9 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		
 		function getLocation(t , callback , len)
 		{
-		   	return $http.get('http://localhost:8080/viewTruckLocation/' + t.id).then(function(response) {
-				t.longitude = response.data.lon;
-				t.latitude = response.data.lat;
+		   	return $http.get(domain+'viewTruckLocation/' + t.id).then(function(response) {
+				t.longitude = response.data.Success.lon;
+				t.latitude = response.data.Success.lat;
 				callback(t , len);
 				return response.data;
 			});
@@ -29,10 +30,11 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		
 		$scope.getActiveTrucks = function()
 		{
-			$http.get("http://localhost:8080/getActiveTrucks")
+			showActiveTrucks([]);
+			$http.get(domain+"getActiveTrucks")
 			
 			.then(function(response) {
-				$scope.trucks = response.data;
+				$scope.trucks = response.data.Success;
 
 				for (var i = 0 ; i<$scope.trucks.length ; i++)
 				{
@@ -43,11 +45,11 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		
 		$scope.getTruckData = function(truckId)
 		{
-			$http.get("http://localhost:8080/viewTruck/"+truckId)
+			$http.get(domain+"viewTruck/"+truckId)
 			
 			.then(function(response) {
 			
-			$scope.selectedTruck = response.data;
+			$scope.selectedTruck = response.data.Success;
 			showSpecificTruck($scope.selectedTruck.id);
 			});
 		}

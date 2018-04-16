@@ -39,15 +39,6 @@ select
 	margin-top: 50px;
 }
 
-#go
-{
-	border-radius: 5px;
-	width: 60px;
-	height: 25px;
-	position: relative;
-	left: 450px;
-}
-
 #input
 {
 	width: 50%;
@@ -71,7 +62,7 @@ select
 	margin: 50px auto ;
 }
 
-input[type="text"], input[type="number"],input[type="date"]
+input[type="text"], input[type="number"],input[type="date"],input[type="password"]
 {
 	border-radius: 5px;
 	width: 150px;
@@ -79,10 +70,41 @@ input[type="text"], input[type="number"],input[type="date"]
 	margin: 10px auto ;
 }
 
-input[type="submit"]
+div>button
 {
 	border-radius: 5px;
 	width: 60px;
 	height: 25px;
 	margin: 20px auto ;
+}
+
+
+#go
+{
+	border-radius: 5px;
+	width: 60px;
+	height: 25px;
+	position: relative;
+	left: 450px;
+}
+
+table
+{
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border: solid 1px;
+	border-collapse: collapse;
+	width: 60%;
+	min-width: 50%;
+	max-width: 75%;
+}
+
+th, td
+{
+	
+	border: solid 1px;
+	border-collapse: collapse;
+	padding: 7px;
+	min-width:50px;
 }
