@@ -24,7 +24,7 @@
 			<div id="activeTrucks" ng-init="getActiveTrucks()">
 				
 				<h3>Active Trucks</h3>
-				<div ng-repeat="truck in trucks" ng-click="getTruckData(truck.id)" onclick='showSpecificTruck(truck.id)'>
+				<div ng-repeat="truck in trucks" ng-click="getTruckData(truck.id)" >
 					<label class="truckId"> {{truck.id}} </label>
 				</div>
 				

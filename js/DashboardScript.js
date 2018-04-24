@@ -1,6 +1,10 @@
 $(document).ready(function(){
 
-	var domain = "seelsapp.herokuapp.com/";
+	var domain = "https://seelsapp.herokuapp.com/";
+	var currentTruck ;
+	var currentDriver ;
+	var currentGood ;
+
 	function showDrivers()
 	{
 		$.get(domain+'getAllDrivers/').then(function(response)
@@ -78,6 +82,18 @@ $(document).ready(function(){
 			$("#addGood").show();
 			url = "showAllGoods/" ;
 		}
+		else if (crudAction == "Update" && object == "Truck"){
+			$("#updateTruck").show();
+			url = "getAllTrucks/" ;
+		}
+		else if (crudAction == "Update" && object == "Driver"){
+			$("#updateDriver").show();
+			url = "getAllDrivers/" ;
+		}
+		else if (crudAction == "Update" && object == "Goods"){
+			$("#updateGood").show();
+			url = "showAllGoods/" ;
+		}
 		else if (crudAction == "Delete" && object == "Truck"){
 			$("#deleteTruck").show();
 			url = "getAllTrucks/" ;
@@ -107,6 +123,31 @@ $(document).ready(function(){
 			if (response.Success)
 			{	
 				alert("Truck Added Successfully") ;
+				$("input[type='text']").val("");
+				showTrucks();
+			}
+			else
+				alert(response.Error);
+		});
+	});
+
+	$("#updateTruck>button[value='Update']").click(function(){
+		
+		$.get(domain+"getTruck/"+$('#updateTruck>input[name="truckID"]').val()).then(function(response){
+			$('#updateTruck>input[name="truckID"]').val(response.Success.id);
+			currentTruck = response.Success.id ;
+		});
+
+		$("#updateTruck>button[value='Update']").hide();
+		$("#updateTruck>button[value='Save']").show();
+	});
+
+	$("#updateTruck>button[value='Save']").click(function(){
+		$.get(domain+currentTruck+"/"+$('#updateTruck>input[name="truckID"]').val()+"/updateTruck").then(function(response)
+		{
+			if (response.Success)
+			{	
+				alert("Truck Updated Successfully") ;
 				$("input[type='text']").val("");
 				showTrucks();
 			}
@@ -145,6 +186,39 @@ $(document).ready(function(){
 		});
 	});
 
+
+	$("#updateDriver>button[value='Update']").click(function(){
+
+		$.get(domain+"getDriver/"+$('#updateDriver>input[name="driverID"]').val()).then(function(response){
+			$('#updateDriver>input[name="driverID"]').val(response.Success.id);
+			$('#updateDriver>input[name="driverName"]').val(response.Success.name);
+			$('#updateDriver>input[name="driverPassword"]').val(response.Success.password);
+
+			currentDriver = response.Success.id ;
+			$('#updateDriver>input').show();
+			$('#updateDriver>label').show();
+		});
+
+		$("#updateDriver>button[value='Update']").hide();
+		$("#updateDriver>button[value='Save']").show();
+	});
+
+
+	$("#updateDriver>button[value='Save']").click(function(){
+		$.get(domain+currentDriver+"/"+ $('#addDriver>input[name="driverName"]').val()+"/"+ $('#addDriver>input[name="driverID"]').val()+"/" +
+			 + $('#addDriver>input[name="driverPassword"]').val()+"/updateDriver").then(function(response)
+		{
+			if (response.Success)
+			{
+				alert("Driver Updated Successfully") ;
+				$("input[type='text']").val("");
+				showDrivers();
+			}
+			else
+				alert(response.Error);
+		});
+	});
+
 	$("#deleteDriver>button").click(function(){
 		$.get(domain+'deleteDriver/'+$('#deleteDriver>input[name="driverID"]').val()).then(function(response)
 		{
@@ -173,6 +247,42 @@ $(document).ready(function(){
 				alert(response.Error);
 		});
 	});
+
+	$("#updateGood>button[value='Update']").click(function(){
+		
+		$.get(domain+"getGood/"+$('#updateGood>input[name="goodName"]').val()).then(function(response){
+			$('#updateGood>input[name="goodName"]').val(response.Success.id);
+			$('#updateGood>input[name="barcode"]').val(response.Success.id);
+			$('#updateGood>input[name="company"]').val(response.Success.id);
+			$('#updateGood>input[name="date"]').val(response.Success.name);
+			$('#updateGood>input[name="numGoods"]').val(response.Success.password);
+
+			currentGood = response.Success.id ;
+			$('#updateGood>input').show();
+			$('#updateGood>label').show();
+		});
+
+		$("#updateGood>button[value='Update']").hide();
+		$("#updateGood>button[value='Save']").show();
+	});
+
+
+	$("#updateGood>button[value='Save']").click(function(){
+		$.get(domain+currentGood+"/"+'updateGood/'+$('#updateGood>input[name="barcode"]').val()+"/" +
+			  $('#updateGood>input[name="goodName"]').val()+"/" + $('#updateGood>input[name="company"]').val()+
+			  $('#updateGood>input[name="date"]').val()+"/" + $('#updateGood>input[name="numGoods"]').val()).then(function(response)
+		{
+			if (response.Success)
+			{
+				alert("Good Updated Successfully") ;
+				$("input[type='text']").val("");
+				showGoods();
+			}
+			else
+				alert(response.Error);
+		});
+	});
+
 
 	$("#deleteGood>button").click(function(){
 		$.get(domain+'deleteGood/'+$('#deleteGood>input[name="goodName"]').val()).then(function(response)

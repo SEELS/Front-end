@@ -2,7 +2,7 @@ var app = angular.module("trucksController",[]);
 
 app.controller("trucksController",function($scope,$http , $q  ){
 
-		var domain = "seelsapp.herokuapp.com/";
+		var domain = "https://seelsapp.herokuapp.com/";
 		var done = false; 
 		var truckArr = [];
 		var location ;
@@ -34,7 +34,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 			$http.get(domain+"getActiveTrucks")
 			
 			.then(function(response) {
-				$scope.trucks = response.data.Success;
+				$scope.trucks = response.data;
 
 				for (var i = 0 ; i<$scope.trucks.length ; i++)
 				{

@@ -1,20 +1,22 @@
-var domain = "seelsapp.herokuapp.com/";
+var domain = "https://seelsapp.herokuapp.com/";
 var map ;
-var markers=[];
+var markers=new Array();
 var flightPath=[];
 var flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates for each truck
-var longitude = [] ;
-var latitude = [];
+var longitude = new Array() ;
+var latitude = new Array();
 
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
-   for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
+   for (var i = 0; i < Object.keys(markers).length; i++) {
+      markers[Object.keys(markers)[i]].setMap(map);
    }
 }
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
+	console.log("clearMarkers");
+	console.log(Object.keys(markers).length);
 	setMapOnAll(null);
 }
 
@@ -44,6 +46,8 @@ function addMarker(location , truckId) {
           position: location,
 		  map: map
     });	
+    console.log("Marker");
+    console.log(markers[truckId]);
     flightPath[truckId].setMap(map);
 	markers[truckId].setPosition(location);
 
@@ -56,11 +60,11 @@ function changeMarkerPosition(marker, lat, lng) {
 }
 
 function initMap() {
-	markers=[];
+	markers=new Array();
 	flightPath=[];
 	flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates for each truck
-	longitude = [] ;
-	latitude = [];
+	longitude = new Array() ;
+	latitude = new Array();
 	
 	var mapOptions = {
 		center: new google.maps.LatLng(30.06263, 31.24967),
@@ -74,7 +78,7 @@ function initMap() {
 function getPosition(truckId) {
 
 	$.get(domain+"viewTruckLocation/" + truckId).then (function(response) {
-		data = response.Success;
+		data = response.Success ;
 		latitude[truckId] = data.lat;
 		longitude[truckId] = data.lon;
 	});
@@ -109,6 +113,7 @@ function showActiveTrucks(trucks)
 		//getRoad(temp);
 		getTripRoad(trucks[0].id);
 		longitude[trucks[i].id] = trucks[i].longitude;
+
 		latitude[trucks[i].id] = trucks[i].latitude;
 	}
 
@@ -138,7 +143,6 @@ function showActiveTrucks(trucks)
 			}			
 		}
 	}, 10000);
-
 }
 
 function showSpecificTruck(truckId)

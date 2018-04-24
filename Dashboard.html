@@ -19,6 +19,7 @@
 	  	<section id="input">
 		  	<select name="crudAction" id="crudAction">
 		  		<option name="add">Add</option>
+		  		<option name="update">Update</option>
 		  		<option name="delete">Delete</option>
 		  	</select>
 		  	<button id="go">Go</button>
@@ -67,6 +68,49 @@
 					<br>
 					<button value="Add">Add</button>
 				</div>
+
+				<div id="updateTruck" style="display: none;" class="formContents">
+					<label>Truck ID:</label> 
+					<input type="text" name="truckID">
+					<br>
+					<button value="Update">Update</button>
+					<button value="Save" style="display: none;" >Save</button>
+				</div>
+
+				<div id="updateDriver" style="display: none;" class="formContents">
+					<label>Driver SSN:</label> 
+					<input type="text" name="driverID">
+					<br>
+					<label style="display: none;">Driver Name:</label> 
+					<input style="display: none;" type="text" name="driverName">
+					<br>
+					<label style="display: none;">Driver Password:</label> 
+					<input style="display: none;" type="Password" name="driverPassword">
+					<br>
+					<button value="Update">Update</button>
+					<button value="Save" style="display: none;" >Save</button>
+				</div>
+				
+				<div id="updateGood" style="display: none;" class="formContents">
+					<label>Barcode: </label> 
+					<input type="text" name="barcode">
+					<br>
+					<label style="display: none;">Name:</label> 
+					<input style="display: none;" type="text" name="goodName">
+					<br>
+					<label style="display: none;">Company:</label> 
+					<input style="display: none;" type="text" name="company">
+					<br>
+					<label style="display: none;">Date: </label>
+					<input style="display: none;" type="date" name="date">
+					<br>
+					<label style="display: none;">Available Number: </label>
+					<input style="display: none;" type="Number" name="numGoods">
+					<br>
+					<button value="Update">Update</button>
+					<button value="Save" style="display: none;" >Save</button>
+				</div>
+
 
 				<div id="deleteTruck" style="display: none;" class="formContents">
 					<label>Truck ID:</label> 
