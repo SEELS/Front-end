@@ -72,6 +72,7 @@ function initMap() {
 		mapTypeId : 'terrain'
 	}
 	map = new google.maps.Map(document.getElementById("map"), mapOptions);
+	return map;
 }
 
 

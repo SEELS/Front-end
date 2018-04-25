@@ -4,6 +4,11 @@
 	margin: 0px;
 }
 
+aside
+{
+	float: left;
+	width: 50%;
+}
 
 nav
 {
@@ -25,7 +30,7 @@ a
 
 h1
 {
-	
+	margin: 15px 40px;
 }
 
 h3
@@ -40,6 +45,8 @@ input[type="text"], input[type="number"],input[type="password"],select
 	width: 150px;
 	height: 25px;
 	margin: 10px auto ;
+	margin-left: 40px;
+
 }
 
 button
@@ -48,4 +55,15 @@ button
 	width: 100px;
 	height: 25px;
 	margin: 20px auto ;
+}
+
+label
+{
+	margin-left: 40px;
+}
+
+#map
+{
+	width: 50%;
+	height: 91vh;
 }

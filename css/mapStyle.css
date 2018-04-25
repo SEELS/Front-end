@@ -5,7 +5,7 @@
 }
 #map 
 {
-	height: 91vh;
+	height: 90vh;
 	width: 70%;
 	float: left;
 }
@@ -19,9 +19,9 @@ html, body
     
 aside, h3
 {
-	height:40%;
+/*	height:40%;
 	width: 30%;
-	display: inline;
+*/	display: inline;
 	margin:10px;
 }
 

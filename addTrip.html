@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 	<head>
-
+		<meta name="viewport" content="initial-scale=1.0, user-scalable=no">
 		<meta charset="utf-8">
-		<link rel="stylesheet" type="text/css" href="css/addTripStyle.css">	  
+		<Title>Add Trip</Title>
+		<link rel="stylesheet" type="text/css" href="css/addTripStyle.css">
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 
 	</head>
 
@@ -15,33 +18,39 @@
 	  		<a href="index.html">Logout</a>
 	  	</nav>
 		
-		<h1>Trip Details</h1>
+		<aside>
+			<h1>Trip Details</h1>
 
-		<h3>Trip Source</h3>
-		<input type="text" name="source" placeholder="Source"> 
-		<button id="mapSrc">Get From Map</button>
-		<br>
+			<h3>Trip Source</h3>
+			<input type="text" name="source" placeholder="Source"> 
+			<button id="mapSrc">Get From Map</button>
+			<br>
 
-		<h3>Trip Destination</h3>
-		<input type="text" name="destination" placeholder="Destination"> 
-		<button id="mapDest">Get From Map</button>
-		<br>
+			<h3>Trip Destination</h3>
+			<input type="text" name="destination" placeholder="Destination"> 
+			<button id="mapDest">Get From Map</button>
+			<br>
+			
+			<h3>Truck ID</h3>
+			<select name="truckID"></select>
+			<br>
+
+			<h3>Driver ID</h3>
+			<select name="truckID"></select>
+			<br>
+
+			<h3>Goods</h3>
+			<label>Good Name</label>
+			<select name="GoodName"></select>
+			<br>
+			<label>Count</label>
+			<input type="number" name="goodsCount">
+		</aside>
 		
-		<h3>Truck ID</h3>
-		<select name="truckID"></select>
-		<br>
+		<div id="map"></div>
 
-		<h3>Driver ID</h3>
-		<select name="truckID"></select>
-		<br>
-
-		<h3>Goods</h3>
-		<label>Good Name</label>
-		<select name="GoodName"></select>
-		<br>
-		<label>Count</label>
-		<input type="number" name="goodsCount">
-		
+		<script src="js/mapScript.js" ></script>	
+		<script src="js/addTripScript.js" ></script>	
 		
   	</body>
 
