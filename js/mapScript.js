@@ -126,7 +126,7 @@ function showActiveTrucks(trucks)
 		}
 	}, 1000);
 	
-	var accidentCheck = setInterval(function(){
+	/*var accidentCheck = setInterval(function(){
 		for (var i=0 ; i<trucks.length; i++)
 		{
 			for (var j=0 ; j<trucks.length; j++)
@@ -143,12 +143,13 @@ function showActiveTrucks(trucks)
 				 });
 			}			
 		}
-	}, 10000);
+	}, 10000);*/
 }
 
 function showSpecificTruck(truckId)
 {
 	clearMarkers();
+	getTripRoad(truckId);
 	markers[truckId].setMap(map);
 }
 
@@ -173,6 +174,7 @@ function highlightRoad(road)
 	  strokeWeight: 2
 	});
 	roadFlightPath.setMap(map);
+	return roadFlightPath ;
 }
 /*
 function getRoad(tripId)
@@ -196,11 +198,11 @@ function getTrip(id)
 	});
 }
 */
-function getTripRoad(id)
+function getTripRoad(truckID)
 {
-	$.get(domain+id+'getTruckTrip/').then(function(response)
+	$.get(domain+truckID+'getTruckTrip/').then(function(response)
 	{
-		$.get(domain+"getRoad/" + response.Success).then(function(response2)
+		$.get(domain+"getRoadByTrip/" + response.Success).then(function(response2)
 		{
 			var road = response2.Success;
 			highlightRoad(road);

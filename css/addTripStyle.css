@@ -30,22 +30,16 @@ a
 
 h1
 {
-	margin: 15px 40px;
+	margin: 15px 35px;
 }
 
-h3
-{
-	margin-left: 40px;
-	font-weight: normal;
-}
-
-input[type="text"], input[type="number"],input[type="password"],select
+input[type="text"], input[type="number"],input[type="password"],input[type="date"],select
 {
 	border-radius: 5px;
 	width: 150px;
 	height: 25px;
 	margin: 10px auto ;
-	margin-left: 40px;
+	margin-left: 35px;
 
 }
 
@@ -53,17 +47,38 @@ button
 {
 	border-radius: 5px;
 	width: 100px;
-	height: 25px;
-	margin: 20px auto ;
+	height: 30px;
+	margin: 10px 20px;
 }
 
-label
+label,sub
 {
-	margin-left: 40px;
+	margin-left: 35px;
 }
 
 #map
 {
 	width: 50%;
 	height: 91vh;
+}
+
+#submit
+{
+	display: block;
+	margin: 20px 250px ;
+}
+
+#addGood
+{
+	margin-top: -50px;
+}
+
+#newRoadDetails
+{
+	display:none;
+}
+
+#addGood
+{
+	margin-top: 15px;
 }

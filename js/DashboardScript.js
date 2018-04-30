@@ -12,7 +12,7 @@ $(document).ready(function(){
 			var arr = response ;
 			var text = "" ;
 			$("#display").html("");
-			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>National ID</th><th>Rate</th></tr>" ;
+			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>SSN</th><th>Rate</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
 				text += "<tr><td>"+arr[i].driver_id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].ssn + "</td><td>"  + arr[i].rate + "</td></tr>" ; 
@@ -47,19 +47,20 @@ $(document).ready(function(){
 	
 	function showGoods()
 	{
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		$.get(domain+'getAllGoods/').then(function(response)
+		{
+			var arr = response ;
+			var text = "" ;
+			$("#display").html("");
+			var text = "<table><tr><th>Barcode</th><th>Name</th><th>Company</th><th>Available Number</th></tr>" ;
+			for (var i=0 ; i< arr.length ; i++)
+			{
+				text += "<tr><td>" + arr[i].barcode + "</td><td>" + arr[i].name + "</td><td>"+arr[i].company + "</td><td>" 
+						+arr[i].num_of_goods + "</td></tr>" ; 
+			}
+			text += "</table>";
+			$("#display").html(text);
+		});	
 	}
 	
 	$("#go").click(function(){
@@ -80,7 +81,7 @@ $(document).ready(function(){
 		}
 		else if (crudAction == "Add" && object == "Goods"){
 			$("#addGood").show();
-			url = "showAllGoods/" ;
+			url = "getAllGoods/" ;
 		}
 		else if (crudAction == "Update" && object == "Truck"){
 			$("#updateTruck").show();
@@ -92,7 +93,7 @@ $(document).ready(function(){
 		}
 		else if (crudAction == "Update" && object == "Goods"){
 			$("#updateGood").show();
-			url = "showAllGoods/" ;
+			url = "getAllGoods/" ;
 		}
 		else if (crudAction == "Delete" && object == "Truck"){
 			$("#deleteTruck").show();
@@ -104,7 +105,7 @@ $(document).ready(function(){
 		}
 		else if (crudAction == "Delete" && object == "Goods"){
 			$("#deleteGood").show();
-			url = "showAllGoods/" ;
+			url = "getAllGoods/" ;
 		}
 
 		var text = "";
@@ -130,7 +131,7 @@ $(document).ready(function(){
 				alert(response.Error);
 		});
 	});
-
+ 
 	$("#updateTruck>button[value='Update']").click(function(){
 		
 		$.get(domain+"getTruck/"+$('#updateTruck>input[name="truckID"]').val()).then(function(response){
@@ -143,7 +144,7 @@ $(document).ready(function(){
 	});
 
 	$("#updateTruck>button[value='Save']").click(function(){
-		$.get(domain+currentTruck+"/"+$('#updateTruck>input[name="truckID"]').val()+"/updateTruck").then(function(response)
+		$.get(domain+"updateTruck/"+currentTruck+"/"+$('#updateTruck>input[name="truckID"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{	
@@ -197,7 +198,6 @@ $(document).ready(function(){
 			currentDriver = response.Success.id ;
 			$('#updateDriver>input').show();
 			$('#updateDriver>label').show();
-			alert("Done");
 		});
 
 		$("#updateDriver>button[value='Update']").hide();
@@ -286,7 +286,7 @@ $(document).ready(function(){
 
 
 	$("#deleteGood>button").click(function(){
-		$.get(domain+'deleteGood/'+$('#deleteGood>input[name="goodName"]').val()).then(function(response)
+		$.get(domain+'deleteGood/'+$('#deleteGood>input[name="barcode"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{

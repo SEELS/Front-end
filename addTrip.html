@@ -20,38 +20,74 @@
 		
 		<aside>
 			<h1>Trip Details</h1>
-
-			<h3>Trip Source</h3>
-			<input type="text" name="source" placeholder="Source"> 
-			<button id="mapSrc">Get From Map</button>
-			<br>
-
-			<h3>Trip Destination</h3>
-			<input type="text" name="destination" placeholder="Destination"> 
-			<button id="mapDest">Get From Map</button>
+			
+			<label>Road</label> 
+			<button id="newRoadsBtn">New Road</button>
+			<button id="exRoadsBtn">Existing Road</button>
 			<br>
 			
-			<h3>Truck ID</h3>
-			<select name="truckID"></select>
+			<div style="display: none;" id="existingRoadDetails">
+				<label>Existing Roads</label> 
+				<select name="exRoads" id="exRoads"></select>
+				<button id="showRoad">Show Road</button>
+			</div>
+
+			<div style="display: none;" id="newRoadDetails">
+				<table>
+					<tr>
+						<td><label>Road Name</label></td>
+						<td><input type="text" name="roadName" id="roadName" placeholder="Road Name"> </td>
+					</tr>
+				
+					<tr>
+						<td><label>Trip Source</label></td>
+						<td><input type="text" name="sourceLng" id="sourceLng" placeholder="Longitude"></td>
+						<td><input type="text" name="sourceLat" id="sourceLat" placeholder="Latitude"> </td>
+						<td><button id="mapSrc">Get From Map</button></td>
+						</tr>
+					<tr>
+						<td><label>Trip Destination</label></td>
+						<td><input type="text" name="destinationLng" id="destinationLng" placeholder="Longitude"></td>
+						<td><input type="text" name="destinationLat" id="destinationLat" placeholder="Latitude"></td>
+						<td><button id="mapDest">Get From Map</button></td>
+					</tr>
+				</table>
+				<sub>To get the location from the map, Click on the location on the map then click the button</sub>
+			</div>
+
+			<label>Truck</label>
+			<select name="truck" id="truck"></select>
 			<br>
 
-			<h3>Driver ID</h3>
-			<select name="truckID"></select>
+			<label>Driver</label>
+			<select name="driver" id="driver"></select>
 			<br>
 
-			<h3>Goods</h3>
+			<label>Date</label>
+			<input type="date" name="date" id="date">
+			<br>
+
+			<label style="font-weight: bold;">Goods</label>
+			<br>
 			<label>Good Name</label>
-			<select name="GoodName"></select>
-			<br>
+			<select name="GoodName" id="goodName">
+				<option value="Good Name" disabled >Good Name</option>
+			</select>
+			
 			<label>Count</label>
-			<input type="number" name="goodsCount">
+			<input type="Number" name="goodsCount" placeholder="Good Count">
+			<br>
+			<center><button id="addGood">Add Good</button></center>
+			
+			<center><button id="submit">Add Trip</button></center>
+
 		</aside>
 		
 		<div id="map"></div>
 
 		<script src="js/mapScript.js" ></script>	
 		<script src="js/addTripScript.js" ></script>	
-		
+		<script src="js/bootstrap.min.js"></script>
   	</body>
 
 </html>
