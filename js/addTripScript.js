@@ -1,6 +1,7 @@
 $("document").ready(function(){
 
     var map = initMap();
+    //var domain = "http://localhost:8080/";
     var domain = "https://seelsapp.herokuapp.com/";
     var lat ,lng;
     var roadLine , roadID=-1;
@@ -15,7 +16,7 @@ $("document").ready(function(){
             
             for (var i=0 ; i< arr.length ; i++)
 			{
-				drivers += "<option>"+arr[i].driver_id +"," + arr[i].name + "</option>" ; 
+				drivers += "<option value='"+arr[i].driver_id+"'>"+arr[i].driver_id +"," + arr[i].name + "</option>" ; 
 			}
 			
 			$("#driver").html(drivers);
@@ -83,7 +84,7 @@ $("document").ready(function(){
             var roads = "" ;
             for (var i=0 ; i<response.length ; i++)
             {
-                roads+="<option value=" +  response[i].id/*road_id*/ + ">" + response[i].name + "</option>";
+                roads+="<option value=" +  response[i].road.id + ">" + response[i].road.name + "</option>";
             }
             $("#exRoads").html(roads);
         });
@@ -107,15 +108,18 @@ $("document").ready(function(){
 
     // Add trip -> save road if new then save the trip
     $("#submit").click(function(){
+
+        console.log(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()
+               +"/0/" + roadID+"/"+ $("input[type='date']").val());
+
         if (roadID == -1)
         {
             // SAVE NEW ROAD
             $.get(domain+"saveRoad/"+$("#roadName").val()+"/"+$("#destinationLat").val()+"/"+$("#destinationLng").val()+"/"
-            +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/").then(function(response){
-                alert(response);
+            +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/").then(function(response){
                 if (response.Success)
                 {
-                    roadID = response.Success.id/*road_id*/;
+                    roadID = response.Success;
                 }
                 else
                 {
@@ -125,16 +129,15 @@ $("document").ready(function(){
             });
         }
 
-        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $("input[type='date']").val()
-              +"/" + $( "#driver option:selected" ).text()+"/0/" + roadID).then(function(response){
-                
+        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()
+               +"/0/" + roadID+"/"+ $("input[type='date']").val()).then(function(response){
                 if (response.Success)
                 {
                     alert("Trip Saved Successfully");
                     $("input").val("");
                 }
                 else
-                    alert(response.Error);
+                    alert("Save Trip Error: " + response.Error);
         });
     });
 

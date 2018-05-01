@@ -202,7 +202,8 @@ function getTripRoad(truckID)
 {
 	$.get(domain+truckID+'getTruckTrip/').then(function(response)
 	{
-		$.get(domain+"getRoadByTrip/" + response.Success).then(function(response2)
+		// GET LOCATIONS OF ROAD OF A TRIP
+		$.get(domain+"tripLocation/" + response.Success).then(function(response2)
 		{
 			var road = response2.Success;
 			highlightRoad(road);

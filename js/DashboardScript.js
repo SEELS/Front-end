@@ -172,9 +172,9 @@ $(document).ready(function(){
 	});
 	 
 	$("#addDriver>button").click(function(e){
-		
+		var pass = $('#addDriver>input[name="driverPassword"]').val();
 		$.get(domain+ $('#addDriver>input[name="driverName"]').val()+"/"+ $('#addDriver>input[name="driverID"]').val()+"/" +
-			 + $('#addDriver>input[name="driverPassword"]').val()+"/saveDriver").then(function(response)
+			 pass+"/saveDriver").then(function(response)
 		{
 			if (response.Success)
 			{
