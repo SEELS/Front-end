@@ -108,7 +108,8 @@ $("document").ready(function(){
 
     // Add trip -> save road if new then save the trip
     $("#submit").click(function(){
-
+        console.log(domain+"saveRoad/"+$("#roadName").val()+"/"+$("#destinationLat").val()+"/"+$("#destinationLng").val()+"/"
+            +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/");
         console.log(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()
                +"/0/" + roadID+"/"+ $("input[type='date']").val());
 
@@ -119,18 +120,18 @@ $("document").ready(function(){
             +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/").then(function(response){
                 if (response.Success)
                 {
-                    roadID = response.Success;
+                    window.roadID = response.Success;
                 }
                 else
                 {
                     alert("Invalid Road ID ");
                 }
-                return;
+                //return;
             });
         }
-
-        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()
-               +"/0/" + roadID+"/"+ $("input[type='date']").val()).then(function(response){
+        alert(roadID);
+        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
+              "/0/" + roadID+"/" + $("input[type='date']").val()).then(function(response){
                 if (response.Success)
                 {
                     alert("Trip Saved Successfully");
