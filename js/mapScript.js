@@ -112,7 +112,7 @@ function showActiveTrucks(trucks)
 		//var temp = getTrip(trucks[0].id);
 		//alert("Temp:  " + temp);
 		//getRoad(temp);
-		getTripRoad(trucks[0].id);
+		getTripRoad(trucks[i].id);
 		longitude[trucks[i].id] = trucks[i].longitude;
 
 		latitude[trucks[i].id] = trucks[i].latitude;
@@ -122,7 +122,7 @@ function showActiveTrucks(trucks)
 		for (var i=0 ; i<trucks.length; i++)
 		{
 			var x = trucks[i].id ;
-			updatePath(x, flightPath[x]);
+			updatePath(x/*trucks[i].driver.driver_id*/, flightPath[x]);
 		}
 	}, 1000);
 	
@@ -200,13 +200,14 @@ function getTrip(id)
 */
 function getTripRoad(truckID)
 {
-	$.get(domain+truckID+'getTruckTrip/').then(function(response)
+	$.get(domain+truckID+'/getTruckTrip/').then(function(response)
 	{
-		// GET LOCATIONS OF ROAD OF A TRIP
-		$.get(domain+"tripLocation/" + response.Success).then(function(response2)
+		// GET LOCATIONS OF ROAD OF A TRIPf
+		$.get(domain+"returnTrip/" + response.Success).then(function(response2)
 		{
 			var road = response2.Success;
 			highlightRoad(road);
+
 		});
 	});
 }

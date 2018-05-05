@@ -109,7 +109,7 @@ $(document).ready(function(){
 		}
 
 		var text = "";
-		if (url == "showAllGoods/")
+		if (url == "getAllGoods/")
 			text = showGoods();
 		else if  (url == "getAllDrivers/")
 			text = showDrivers();
@@ -234,8 +234,8 @@ $(document).ready(function(){
 	});
 
 	$("#addGood>button").click(function(){
-		$.get(domain+'addGood/'+$('#addGood>input[name="barcode"]').val()+"/" +
-			  $('#addGood>input[name="goodName"]').val()+"/" + $('#addGood>input[name="company"]').val()+
+		$.get(domain+'saveGoods/'+$('#addGood>input[name="barcode"]').val()+"/" +
+			  $('#addGood>input[name="goodName"]').val()+"/" + $('#addGood>input[name="company"]').val()+"/"+
 			  $('#addGood>input[name="date"]').val()+"/" + $('#addGood>input[name="numGoods"]').val()).then(function(response)
 		{
 			if (response.Success)

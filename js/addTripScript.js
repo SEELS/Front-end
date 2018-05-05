@@ -64,6 +64,7 @@ $("document").ready(function(){
     });
     
     $("#newRoadsBtn").click(function(){
+        roadID = -1 ;
         $("#existingRoadDetails").hide();
         $("#newRoadDetails").show();
     });
@@ -84,9 +85,10 @@ $("document").ready(function(){
             var roads = "" ;
             for (var i=0 ; i<response.length ; i++)
             {
-                roads+="<option value=" +  response[i].road.id + ">" + response[i].road.name + "</option>";
+                roads+="<option value=" +  response[i].id + ">" + response[i].name + "</option>";
             }
             $("#exRoads").html(roads);
+            roadID = $( "#exRoads" ).val();
         });
     });
 
@@ -95,8 +97,7 @@ $("document").ready(function(){
         $.get(domain+"getRoad/" + $( "#exRoads option:selected" ).val()).then(function(response)
 		{
             var road = response.Success;
-            console.log($( "#exRoads option:selected" ).val());
-            //roadLine.setMap(null);      // Remove the old road
+         //   roadLine.setMap(null);      // Remove the old road
             roadLine = highlightRoad(road);
 		});
     });
@@ -108,11 +109,7 @@ $("document").ready(function(){
 
     // Add trip -> save road if new then save the trip
     $("#submit").click(function(){
-        console.log(domain+"saveRoad/"+$("#roadName").val()+"/"+$("#destinationLat").val()+"/"+$("#destinationLng").val()+"/"
-            +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/");
-        console.log(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()
-               +"/0/" + roadID+"/"+ $("input[type='date']").val());
-
+        var url = "" ;
         if (roadID == -1)
         {
             // SAVE NEW ROAD
@@ -120,7 +117,17 @@ $("document").ready(function(){
             +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/").then(function(response){
                 if (response.Success)
                 {
-                    window.roadID = response.Success;
+                    roadID = response.Success;
+                     $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
+                          "/0/" + roadID+"/" + $("input[type='date']").val()).then(function(response2){
+                            if (response2.Success)
+                            {
+                                alert("Trip Saved Successfully");
+                                $("input").val("");
+                            }
+                            else
+                                alert("Save Trip Error: " + response2.Error);
+                    });
                 }
                 else
                 {
@@ -129,8 +136,9 @@ $("document").ready(function(){
                 //return;
             });
         }
-        alert(roadID);
-        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
+        else
+        {
+            $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
               "/0/" + roadID+"/" + $("input[type='date']").val()).then(function(response){
                 if (response.Success)
                 {
@@ -139,7 +147,8 @@ $("document").ready(function(){
                 }
                 else
                     alert("Save Trip Error: " + response.Error);
-        });
+            });
+        }    
     });
 
     showTrucks();
