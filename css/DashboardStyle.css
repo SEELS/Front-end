@@ -15,12 +15,36 @@ nav
 	padding-right: 50px;
 }
 
-a
+nav>a
 {
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
 	margin-left: 50px;
+}
+
+#goodsMenu
+{
+	width: 150px;
+	height: 60px;
+	background-color:  rgb(70,150 ,250);
+	display: none;
+	list-style-type: none;
+	position: absolute;
+	right: 25px;
+	top:60px;
+}
+
+li>a
+{
+	clear: right;
+	float: left;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	display: block;
+	margin-left: 25px;
+	margin-bottom: 10px;
 }
 
 select

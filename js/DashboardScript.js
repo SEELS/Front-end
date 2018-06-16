@@ -5,6 +5,11 @@ $(document).ready(function(){
 	var currentDriver ;
 	var currentGood ;
 
+	// Nav bar
+    $("#goods").click(function(){
+        $("#goodsMenu").slideToggle();
+    });
+
 	function showDrivers()
 	{
 		$.get(domain+'getAllDrivers/').then(function(response)

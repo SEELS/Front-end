@@ -1,13 +1,29 @@
 *
 {
+	margin:0px;
 	padding: 0px;
-	margin: 0px;
 }
 
-aside
+#map 
 {
+	height: 90vh;
+	width: 70%;
 	float: left;
-	width: 50%;
+}
+
+html, body 
+{
+	height: 100%;
+    margin: 0;
+    padding: 0;
+}
+    
+aside, h3
+{
+/*	height:40%;
+	width: 30%;
+*/	display: inline;
+	margin:10px;
 }
 
 nav
@@ -19,6 +35,7 @@ nav
 	padding: 20px;
 	padding-right: 50px;
 }
+
 nav>a
 {
 	text-decoration: none;
@@ -36,8 +53,7 @@ nav>a
 	list-style-type: none;
 	position: absolute;
 	right: 25px;
-	top:60px;
-	z-index: 50;
+	top:55px;
 }
 
 li>a
@@ -52,57 +68,35 @@ li>a
 	margin-bottom: 10px;
 }
 
-h1
+
+#go
 {
-	margin: 15px 35px;
+	border-radius: 5px;
+	width: 60px;
+	height: 25px;
+	margin:10px;
 }
 
-input[type="text"], input[type="number"],input[type="password"],input[type="date"],select
+select
 {
 	border-radius: 5px;
 	width: 150px;
 	height: 25px;
-	margin: 10px auto ;
-	margin-left: 35px;
-
+	margin: 10px;
 }
 
-button
-{
-	border-radius: 5px;
-	width: 100px;
-	height: 30px;
-	margin: 10px 20px;
-}
-
-label,sub
-{
-	margin-left: 35px;
-}
-
-#map
-{
-	width: 50%;
-	height: 91vh;
-}
-
-#submit
+table
 {
 	display: block;
-	margin: 20px 250px ;
+	margin: 20px 70px;
+	text-align: center;
 }
 
-#addGood
+th, td
 {
-	margin-top: -50px;
-}
-
-#newRoadDetails
-{
-	display:none;
-}
-
-#addGood
-{
-	margin-top: 15px;
+	
+	border: solid 1px;
+	border-collapse: collapse;
+	padding: 7px;
+	width: 50px;
 }

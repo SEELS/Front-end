@@ -6,6 +6,11 @@ var flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates f
 var longitude = new Array() ;
 var latitude = new Array();
 
+// Nav bar
+$("#goods").click(function(){
+    $("#goodsMenu").slideToggle();
+});
+
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
    for (var i = 0; i < Object.keys(markers).length; i++) {
@@ -50,7 +55,7 @@ function addMarker(location , truckId) {
     console.log(markers[truckId]);
     flightPath[truckId].setMap(map);
 	markers[truckId].setPosition(location);
-
+	return flightPath[truckId];
 }
 
 
