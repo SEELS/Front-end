@@ -1,0 +1,86 @@
+*
+{
+	margin:0px;
+	padding: 0px;
+}
+
+#map 
+{
+	height: 90vh;
+	width: 70%;
+	float: left;
+}
+
+html, body 
+{
+	height: 100%;
+    margin: 0;
+    padding: 0;
+}
+    
+aside, h3
+{
+/*	height:40%;
+	width: 30%;
+*/	display: inline;
+	margin:10px;
+}
+
+nav
+{
+	width: 94.85%;
+	background-color: rgb(70,150 ,250);
+	text-align: right;
+	height:4%;
+	padding: 20px;
+	padding-right: 50px;
+}
+
+nav>a
+{
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	margin-left: 50px;
+}
+
+#goodsMenu
+{
+	width: 150px;
+	height: 60px;
+	background-color:  rgb(70,150 ,250);
+	display: none;
+	list-style-type: none;
+	position: absolute;
+	right: 25px;
+	top:55px;
+}
+
+li>a
+{
+	clear: right;
+	float: left;
+	text-decoration: none;
+	color: white;
+	font-weight: bold;
+	display: block;
+	margin-left: 25px;
+	margin-bottom: 10px;
+}
+
+#go
+{
+	border-radius: 5px;
+	width: 60px;
+	height: 25px;
+	margin:10px;
+}
+
+select
+{
+	border-radius: 5px;
+	width: 150px;
+	height: 25px;
+	margin: 10px;
+}
+

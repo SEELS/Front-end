@@ -11,6 +11,8 @@ $("#goods").click(function(){
     $("#goodsMenu").slideToggle();
 });
 
+initMap();
+
 // Sets the map on all markers in the array.
 function setMapOnAll(map) {
    for (var i = 0; i < Object.keys(markers).length; i++) {
@@ -107,7 +109,6 @@ function updatePath(truckId) {
 
 function showActiveTrucks(trucks)
 {
-	initMap();
 	if (trucks.length == 0)
 		return;
 	trips=[];

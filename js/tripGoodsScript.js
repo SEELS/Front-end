@@ -1,6 +1,6 @@
 $(document).ready(function (){
 
-	var map = initMap();
+//	var map = initMap();
 
 	var domain = "https://seelsapp.herokuapp.com/";
 
