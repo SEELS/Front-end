@@ -53,8 +53,22 @@ function addMarker(location , truckId) {
           position: location,
 		  map: map
     });	
-    console.log("Marker");
-    console.log(markers[truckId]);
+
+
+
+
+
+
+
+	google.maps.event.addListener(markers[truckId], 'click', function() {/*pop up to show truck id*/});
+
+
+
+
+
+
+
+
     flightPath[truckId].setMap(map);
 	markers[truckId].setPosition(location);
 	return flightPath[truckId];

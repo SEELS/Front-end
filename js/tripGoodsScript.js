@@ -37,12 +37,13 @@ $(document).ready(function (){
 		// SHOW GOODS
 		$.get(domain+'getGoods/' + truckID).then(function(response) {
 
-			var goods = "<table><tr><th>#</th><th>Barcode</th><th>Good Name</th><th>Quantity<th></tr>";
+			var goods = "<table><tr><th class='num'>#</th><th class='barcode'>Barcode</th><th class='name'>Good Name</th>"
+						+"<th class='qty'>Quantity</th></tr>";
 
 			for (var i=0 ; i<response.length ; i++)
 			{
-				goods += "<tr><td>" + i + "</td><td>"+response[i].barcode+"</td><td>"+response[i].name+"</td><td>"
-					  +  response[i].count+"</td></tr>";
+				goods += "<tr><td class='num'>" + i + "</td><td class='barcode'>"+response[i].barcode+"</td>"
+					  +  "<td class='name'>"+response[i].name+"</td><td class='qty'>" +  response[i].count+"</td></tr>";
 			}
 
 			goods+= "</table>";

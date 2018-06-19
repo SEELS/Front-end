@@ -5,9 +5,35 @@
 }
 #map 
 {
-	height: 90vh;
+	margin: 5px;
+	height: 91%;
+	width: 98.5%;
+	float: left;
+	border-radius: 5px;
+}
+
+section
+{
+	height: 87%;
 	width: 70%;
 	float: left;
+	margin-top: 5px;
+	margin-left: 5px;
+	border-radius: 5px;
+	border-style: solid;
+	border-color:#7A96C5;
+}
+
+section>h3
+{
+	margin: 5px;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 5px;
+	float: left;
+	width: 96.75%;
+	color: white; 
+	background-color:#7A96C5;
 }
 
 html, body 
@@ -17,12 +43,11 @@ html, body
     padding: 0;
 }
     
-aside, h3
+aside/*, h3*/
 {
-/*	height:40%;
-	width: 30%;
-*/	display: inline;
+	display: inline;
 	margin:10px;
+	background-color:#7A96C5;
 }
 
 .truckId , label
@@ -30,24 +55,49 @@ aside, h3
 	margin-left: 15px;
 }
 
-#activeTrucks
+#truckDetails , #activeTrucks
 {
+	width: 27%;
 	height: 40%;
+	margin:10px;
+	padding-top: 6px;
+	border-radius: 5px;
+	float: right;
+	border-style: solid;
+	display: inline-block;
+	border-color:#7A96C5;
 }
 
-#truckDetails
+#activeTrucks
 {
-	height: 50%;
+	margin-top: -10px;	
+}
+
+.header
+{
+	color: white; 
+	padding: 5px;
+	border-radius: 5px;
+	width: 93%;
+	margin-left: 5px;
+	background-color:#7A96C5;
+}
+
+#driver
+{
+	margin-top: 5px;
 }
 
 nav
 {
 	width: 94.85%;
-	background-color: rgb(70,150 ,250);
+	background-color:#7A96C5;
 	text-align: right;
 	height:4%;
 	padding: 20px;
 	padding-right: 50px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 nav>a
 {
@@ -55,13 +105,14 @@ nav>a
 	color: white;
 	font-weight: bold;
 	margin-left: 50px;
+	font-size: 17px;
 }
 
 #goodsMenu
 {
 	width: 150px;
 	height: 60px;
-	background-color:  rgb(70,150 ,250);
+	background-color: #7A96C5;
 	display: none;
 	list-style-type: none;
 	position: absolute;

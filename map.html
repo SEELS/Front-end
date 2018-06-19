@@ -25,13 +25,14 @@
 	  		<a href="index.html">Logout</a>
 	  	</nav>
 
-
-		<div id="map"></div>
-		
+	  	<section>
+	  		<h3>All Trucks</h3>
+			<div id="map"></div>
+		</section>
 		<aside>
 			<div id="activeTrucks" ng-init="getActiveTrucks()">
 				
-				<h3>Active Trucks</h3>
+				<h3 class="header">Active Trucks</h3>
 				<div ng-repeat="truck in trucks" ng-click="getTruckData(truck.id)" >
 					<label class="truckId"> {{truck.id}} </label>
 				</div>
@@ -44,7 +45,7 @@
 				<br>
 				<label>{{selectedTruck.id}}<br>
 				<label>Speed: </label>{{selectedTruck.currentSpeed}}<label>KPH</label><br>
-				<h3 class="header">Driver</h3><br>
+				<h3 class="header" id="driver">Driver</h3><br>
 				<label>{{selectedTruck.driver.name}}</label><br>
 				<label>{{selectedTruck.driver.ssn}}</label><br>
 				<label>{{selectedTruck.driver.rate}}</label><br>

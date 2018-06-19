@@ -13,7 +13,7 @@ aside
 nav
 {
 	width: 94.85%;
-	background-color: rgb(70,150 ,250);
+	background-color:#7A96C5;
 	text-align: right;
 	height:4%;
 	padding: 20px;
@@ -31,12 +31,12 @@ nav>a
 {
 	width: 150px;
 	height: 60px;
-	background-color:  rgb(70,150 ,250);
+	background-color: #7A96C5;
 	display: none;
 	list-style-type: none;
 	position: absolute;
 	right: 25px;
-	top:60px;
+	top:55px;
 	z-index: 50;
 }
 

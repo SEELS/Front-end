@@ -15,7 +15,7 @@ $(document).ready(function (){
 			goods += "<option value='"+arr[i].barcode+"'>"+arr[i].name + "</option>" ; 
 		}
 			
-		$("#goods").html(goods);
+		$("#goodsList").html(goods);
 		
 	});
 	
@@ -35,14 +35,15 @@ $(document).ready(function (){
 
 		// DISPLAY GOOD'S DETAILS
 		$.get(domain+"getGoodDetails/" + barcode).then(function(response){
-			var good = response;
-			goodDetails += "<h3>Barcode: "+ good.barcode +"</h3";
-			goodDetails += "<h3>Name"+ good.name+"</h3";
-			goodDetails += "<h3>Available Count"+good.count+"</h3";
+			
+			var good = response; 
+			goodDetails += "<h4>Barcode: </h4>"+ good.barcode;
+			goodDetails += "<br><h4>Name: </h4>"+ good.name;
+			goodDetails += "<br><h4>Available Count: </h4>"+good.count;
 		});
-		$("#displayGood").html(goodDetails);
+		$("#displayGood").html($("#displayGood").html()+goodDetails);
+		$("#displayGood").show();
 
 	});
-	
 
 });
