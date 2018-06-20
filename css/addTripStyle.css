@@ -4,12 +4,6 @@
 	margin: 0px;
 }
 
-aside
-{
-	float: left;
-	width: 50%;
-}
-
 nav
 {
 	width: 94.85%;
@@ -18,6 +12,8 @@ nav
 	height:4%;
 	padding: 20px;
 	padding-right: 50px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
 }
 nav>a
 {
@@ -25,6 +21,7 @@ nav>a
 	color: white;
 	font-weight: bold;
 	margin-left: 50px;
+	font-size: 17px;
 }
 
 #goodsMenu
@@ -36,8 +33,7 @@ nav>a
 	list-style-type: none;
 	position: absolute;
 	right: 25px;
-	top:55px;
-	z-index: 50;
+	top:50px;
 }
 
 li>a
@@ -52,9 +48,36 @@ li>a
 	margin-bottom: 10px;
 }
 
-h1
+aside
 {
-	margin: 15px 35px;
+	float: left;
+	width: 45%;
+	height: 88vh;
+	margin-top: 5px;
+	margin-left: 5px;
+	border-radius: 5px;
+	border-style: solid;
+	border-color:#7A96C5;
+}
+
+h1 , #goodsArea>h4
+{
+	margin: 5px;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 5px;
+	float: left;
+	color: white; 
+	background-color:#7A96C5;
+	width: 95%;
+}
+
+#goodsArea
+{
+	border-radius: 5px;
+	border-style: solid;
+	border-color:#7A96C5;
+	margin: 10px;
 }
 
 input[type="text"], input[type="number"],input[type="password"],input[type="date"],select
@@ -62,9 +85,14 @@ input[type="text"], input[type="number"],input[type="password"],input[type="date
 	border-radius: 5px;
 	width: 150px;
 	height: 25px;
-	margin: 10px auto ;
-	margin-left: 35px;
+	margin-top: 10px;
+	margin-right: 15px;
 
+}
+
+input[type="date"]
+{
+	margin-left: 10px;
 }
 
 button
@@ -72,29 +100,51 @@ button
 	border-radius: 5px;
 	width: 100px;
 	height: 30px;
-	margin: 10px 20px;
+	margin: 10px ;
 }
 
 label,sub
 {
-	margin-left: 35px;
+	margin-left: 15px;
+	margin-right: 10px;
+}
+
+section
+{
+	height: 88vh;
+	width: 52%;
+	float: right;
+	margin-top: 5px;
+	margin-right: 5px;
+	border-radius: 5px;
+	border-style: solid;
+	border-color:#7A96C5;
 }
 
 #map
 {
-	width: 50%;
-	height: 91vh;
+	margin: 5px;
+	height: 91%;
+	width: 98.5%;
+	border-radius: 5px;
+}
+
+h3
+{
+	margin: 5px;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 5px;
+	float: left;
+	color: white; 
+	background-color:#7A96C5;
+	width: 95.5%;
 }
 
 #submit
 {
 	display: block;
-	margin: 20px 250px ;
-}
-
-#addGood
-{
-	margin-top: -50px;
+	margin: 10px 250px ;
 }
 
 #newRoadDetails
@@ -105,4 +155,35 @@ label,sub
 #addGood
 {
 	margin-top: 15px;
+}
+
+#doneGoods
+{
+	display: block;
+	margin: -10px auto;
+}
+
+#goodsTable
+{
+	border: solid #7A96C5;
+	border-radius: 5px;
+	display: block;
+	margin: 20px auto;
+	text-align: center;
+	border-spacing: 0;
+	width: 66.4%;
+	display: none;
+	
+}
+
+th, #goodsTable>tr>td
+{
+	border: solid #7A96C5 1px;
+	padding: 7px 10px;
+}
+
+th
+{
+	background-color: #7A96C5;
+	color: white;	
 }

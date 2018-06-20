@@ -20,6 +20,7 @@ nav>a
 	text-decoration: none;
 	color: white;
 	font-weight: bold;
+	font-size: 17px;
 	margin-left: 50px;
 }
 
@@ -47,6 +48,18 @@ li>a
 	margin-bottom: 10px;
 }
 
+h2
+{
+	margin: 5px;
+	padding: 5px;
+	padding-left: 15px;
+	border-radius: 5px;
+	float: left;
+	width: 95.5%;
+	color: white; 
+	background-color:#7A96C5;
+}
+
 select
 {
 	display: block;
@@ -66,18 +79,29 @@ select
 #input
 {
 	width: 50%;
-	height: 90vh;
+	height: 84vh;
 	float: left;
-	border-right-style: solid;
+
+	border: solid #7A96C5;
+	border-radius: 5px;
+	display: block;
+	margin: 20px 10px;
+
+	/*border-right-style: solid;
 	border-right-color: #7A96C5;
-	border-right-width: 3px; 
+	border-right-width: 3px; */
 }
 
 #display
 {
-	width: 49%;
+	width: 45%;
 	height: 70%;
 	float: left;
+	/*border: solid #7A96C5;
+	border-radius: 5px;
+	display: block;
+	margin: 20px 20px;
+	*/
 }
 
 #inputFields
@@ -112,24 +136,27 @@ div>button
 	left: 450px;
 }
 
+
 table
 {
+	border: solid #7A96C5;
+	border-radius: 5px;
 	display: block;
-	margin: 20px 150px;
 	text-align: center;
-	/*border: solid 1px;
-	border-collapse: collapse;
-	/*width: 60%;
-	min-width: 50%;
-	max-width: 75%;*/
+	border-spacing: 0;
+	width: 95%;
+	margin: 20px auto;
 }
 
 th, td
 {
-	
-	border: solid 1px;
-	border-collapse: collapse;
+	border: solid #7A96C5 1px;
 	padding: 7px;
-	width: 70px;
-	/*min-width:50px;*/
+	width: 20%;
+}
+
+th
+{
+	background-color: #7A96C5;
+	color: white;	
 }

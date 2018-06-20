@@ -239,9 +239,9 @@ $(document).ready(function(){
 	});
 
 	$("#addGood>button").click(function(){
-		$.get(domain+'saveGoods/'+$('#addGood>input[name="barcode"]').val()+"/" +
-			  $('#addGood>input[name="goodName"]').val()+"/" + $('#addGood>input[name="company"]').val()+"/"+
-			  $('#addGood>input[name="date"]').val()+"/" + $('#addGood>input[name="numGoods"]').val()).then(function(response)
+		$.get(domain+'saveGoods/'+$('#addGood>input[name="goodName"]').val()+"/" +
+			  $('#addGood>input[name="company"]').val()+"/" + $('#addGood>input[name="barcode"]').val()+"/"+
+			  $('#addGood>input[type="date"]').val()+"/" + $('#addGood>input[name="numGoods"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{
@@ -303,4 +303,5 @@ $(document).ready(function(){
 				alert(response.Error);
 		});
 	});
+
 });

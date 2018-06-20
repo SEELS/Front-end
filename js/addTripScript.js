@@ -5,7 +5,10 @@ $("document").ready(function(){
     var domain = "https://seelsapp.herokuapp.com/";
     var lat ,lng;
     var roadLine , roadID=-1;
-
+    var goodsArea = false ;
+    var goodsArr = [] ;
+    var goodsParam = "";
+ 
     // initialize <select>
     function showDrivers()
 	{
@@ -45,8 +48,9 @@ $("document").ready(function(){
             var goods = "";
 			for (var i=0 ; i< arr.length ; i++)
 			{
-                goods+= "<option>" + arr[i].name+ "</option>";
+                goods+= "<option value='"+arr[i].barcode+"'>" + arr[i].name+ "</option>";
             }
+
             $("#goodName").html(goods);
 		});			
     }
@@ -76,7 +80,7 @@ $("document").ready(function(){
     
     $("#mapDest").click(function(){
         $("#destinationLng").val(lng);
-        $("#destinationLat").val(lat);
+         $("#destinationLat").val(lat);
      });
 
      // get existing roads , add them to <select>
@@ -107,9 +111,57 @@ $("document").ready(function(){
         roadID = this.value;
       })
 
-    // Add trip -> save road if new then save the trip
+    // Max Num available of the selected good
+     $('#goodName').on('change', function() {
+        var barcode = $('#goodName :selected').val() ;
+        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
+            $("#goodsCount").attr("max" , response);
+        });
+      })
+
+    // Add goods to trip
+    /* Put the goods with their counts in an array then add it to the trip in "AddTrip"*/
+    $("#addGood").click(function(){
+        var name =  $('#goodName :selected').text();
+        var count = $("#goodsCount").val();
+        var barcode = $('#goodName :selected').val() ;
+        var available = 0 ;
+
+        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
+            available = response ;
+        });
+
+        if (goodsArr[name])
+        {
+            $("#"+name+">.count").html(Number($("#"+name+">.count").html())+Number(count));
+            goodsArr[name] += count ;
+        }
+        else
+        {
+            goodsArr[name] = count ;
+            var tr = "<tr id=" + name +"><td>"+name+"</td><td class='count'>"+count+"</td><td>"+available+"</td></tr>";
+            $("goodsTable").append(tr);
+        }
+
+        $("goodsTable").show();
+
+    })
+
+    //Add trip -> save road if new then save the trip
     $("#submit").click(function(){
-        var url = "" ;
+
+        // PREPARE THE GOODS PARAMETER STRING
+        for (var good in goodsArr) 
+        {
+            if (goodsArr[good] == 0)
+                continue; 
+            goodsParam += good + ":" + goodsArr[good] +",";
+        }
+
+        // remove the last "," placed after the last item
+        goodsParam = goodsParam.substring(0, goodsParam.length - 1); 
+
+
         if (roadID == -1)
         {
             // SAVE NEW ROAD
@@ -119,7 +171,7 @@ $("document").ready(function(){
                 {
                     roadID = response.Success;
                      $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
-                          "/0/" + roadID+"/" + $("input[type='date']").val()).then(function(response2){
+                          "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response2){
                             if (response2.Success)
                             {
                                 alert("Trip Saved Successfully");
@@ -139,7 +191,7 @@ $("document").ready(function(){
         else
         {
             $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
-              "/0/" + roadID+"/" + $("input[type='date']").val()).then(function(response){
+              "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response){
                 if (response.Success)
                 {
                     alert("Trip Saved Successfully");
@@ -151,9 +203,33 @@ $("document").ready(function(){
         }    
     });
 
+    $("#goodsArea").click(function(){
+        if (!goodsArea)
+        {
+            goodsArea = true ;
+            $("aside>*").hide();
+            $("#goodsArea").css("border-style" , "none");
+            $("#goodsArea").show();
+            $("#doneGoods").show();
+            $("#goodsTable").show();   
+        }
+    });
+
+    $("#doneGoods").click(function(){
+        $("#goodsArea").css("border-style" , "solid");
+        $("#goodsArea").show();
+        $("aside>*").show();
+        $("#existingRoadDetails").hide();
+        $("#newRoadDetails").hide();
+        $("#doneGoods").hide();
+        $("#goodsTable").hide();
+        goodsArea = false ;
+    });
+    
+
     showTrucks();
     showDrivers();
-    showGoods();
+    //showGoods();
      
 });
 
