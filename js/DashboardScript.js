@@ -123,8 +123,8 @@ $(document).ready(function(){
 	});
 
 
-	$("#addTruck>button").click(function(){
-		$.get(domain+$('#addTruck>input[name="truckID"]').val()+"/saveTruck").then(function(response)
+	$("#addTruck>tbody>tr>td>button").click(function(){
+		$.get(domain+$('#addTruck>tbody>tr>td>input[name="truckID"]').val()+"/saveTruck").then(function(response)
 		{
 			if (response.Success)
 			{	
@@ -137,19 +137,19 @@ $(document).ready(function(){
 		});
 	});
  
-	$("#updateTruck>button[value='Update']").click(function(){
+	$("#updateTruck>tbody>tr>td>button[value='Update']").click(function(){
 		
-		$.get(domain+"getTruck/"+$('#updateTruck>input[name="truckID"]').val()).then(function(response){
-			$('#updateTruck>input[name="truckID"]').val(response.Success.id);
+		$.get(domain+"getTruck/"+$('#updateTruck>tbody>tr>td>input[name="truckID"]').val()).then(function(response){
+			$('#updateTruck>tbody>tr>td>input[name="truckID"]').val(response.Success.id);
 			currentTruck = response.Success.id ;
 		});
 
-		$("#updateTruck>button[value='Update']").hide();
-		$("#updateTruck>button[value='Save']").show();
+		$("#updateTruck>tbody>tr>td>button[value='Update']").hide();
+		$("#updateTruck>tbody>tr>td>button[value='Save']").show();
 	});
 
-	$("#updateTruck>button[value='Save']").click(function(){
-		$.get(domain+"updateTruck/"+currentTruck+"/"+$('#updateTruck>input[name="truckID"]').val()).then(function(response)
+	$("#updateTruck>tbody>tr>td>button[value='Save']").click(function(){
+		$.get(domain+"updateTruck/"+currentTruck+"/"+$('#updateTruck>tbody>tr>td>input[name="truckID"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{	
@@ -162,8 +162,8 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#deleteTruck>button").click(function(){
-		$.get(domain+'deleteTruck/'+$('#deleteTruck>input[name="truckID"]').val()).then(function(response)
+	$("#deleteTruck>tbody>tr>td>button").click(function(){
+		$.get(domain+'deleteTruck/'+$('#deleteTruck>tbody>tr>td>input[name="truckID"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{
@@ -176,9 +176,9 @@ $(document).ready(function(){
 		});
 	});
 	 
-	$("#addDriver>button").click(function(e){
-		var pass = $('#addDriver>input[name="driverPassword"]').val();
-		$.get(domain+ $('#addDriver>input[name="driverName"]').val()+"/"+ $('#addDriver>input[name="driverID"]').val()+"/" +
+	$("#addDriver>tbody>tr>td>button").click(function(e){
+		var pass = $('#addDriver>tbody>tr>td>input[name="driverPassword"]').val();
+		$.get(domain+ $('#addDriver>tbody>tr>td>input[name="driverName"]').val()+"/"+ $('#addDriver>tbody>tr>td>input[name="driverID"]').val()+"/" +
 			 pass+"/saveDriver").then(function(response)
 		{
 			if (response.Success)
@@ -193,26 +193,27 @@ $(document).ready(function(){
 	});
 
 
-	$("#updateDriver>button[value='Update']").click(function(){
+	$("#updateDriver>tbody>tr>td>button[value='Update']").click(function(){
 
-		$.get(domain+"getDriver/"+$('#updateDriver>input[name="driverID"]').val()).then(function(response){
-			$('#updateDriver>input[name="driverID"]').val(response.Success.id);
-			$('#updateDriver>input[name="driverName"]').val(response.Success.name);
-			$('#updateDriver>input[name="driverPassword"]').val(response.Success.password);
+		$.get(domain+"getDriver/"+$('#updateDriver>tbody>tr>td>input[name="driverID"]').val()).then(function(response){
+			$('#updateDriver>tbody>tr>td>input[name="driverID"]').val(response.Success.driver_id);
+			$('#updateDriver>tbody>tr>td>input[name="driverName"]').val(response.Success.name);
+			$('#updateDriver>tbody>tr>td>input[name="driverPassword"]').val(response.Success.password);
 
-			currentDriver = response.Success.id ;
-			$('#updateDriver>input').show();
-			$('#updateDriver>label').show();
+			currentDriver = response.Success.driver_id ;
+			$('#updateDriver>tbody>tr>td>input').show();
+			$('#updateDriver>tbody>tr>td>label').show();
 		});
 
-		$("#updateDriver>button[value='Update']").hide();
-		$("#updateDriver>button[value='Save']").show();
+		$("#updateDriver>tbody>tr>td>button[value='Update']").hide();
+		$("#updateDriver>tbody>tr>td>button[value='Save']").show();
 	});
 
 
-	$("#updateDriver>button[value='Save']").click(function(){
-		$.get(domain+currentDriver+"/"+ $('#addDriver>input[name="driverName"]').val()+"/"+ $('#addDriver>input[name="driverID"]').val()+"/" +
-			 + $('#addDriver>input[name="driverPassword"]').val()+"/updateDriver").then(function(response)
+	$("#updateDriver>tbody>tr>td>button[value='Save']").click(function(){
+		$.get(domain+currentDriver+"/"+ $('#updateDriver>tbody>tr>td>input[name="driverName"]').val()+"/"
+			 + $('#updateDriver>tbody>tr>td>input[name="driverID"]').val()+"/"
+			 + $('#updateDriver>tbody>tr>td>input[name="driverPassword"]').val()+"/updateDriver").then(function(response)
 		{
 			if (response.Success)
 			{
@@ -225,8 +226,8 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#deleteDriver>button").click(function(){
-		$.get(domain+'deleteDriver/'+$('#deleteDriver>input[name="driverID"]').val()).then(function(response)
+	$("#deleteDriver>tbody>tr>td>button").click(function(){
+		$.get(domain+'deleteDriver/'+$('#deleteDriver>tbody>tr>td>input[name="driverID"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{	alert("Driver Deleted Successfully") ;
@@ -238,10 +239,10 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#addGood>button").click(function(){
-		$.get(domain+'saveGoods/'+$('#addGood>input[name="goodName"]').val()+"/" +
-			  $('#addGood>input[name="company"]').val()+"/" + $('#addGood>input[name="barcode"]').val()+"/"+
-			  $('#addGood>input[type="date"]').val()+"/" + $('#addGood>input[name="numGoods"]').val()).then(function(response)
+	$("#addGood>tbody>tr>td>button").click(function(){
+		$.get(domain+'saveGoods/'+$('#addGood>tbody>tr>td>input[name="goodName"]').val()+"/" +
+			  $('#addGood>tbody>tr>td>input[name="company"]').val()+"/" + $('#addGood>tbody>tr>td>input[name="barcode"]').val()+"/"+
+			  $('#addGood>tbody>tr>td>input[type="date"]').val()+"/" + $('#addGood>tbody>tr>td>input[name="numGoods"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{
@@ -254,29 +255,29 @@ $(document).ready(function(){
 		});
 	});
 
-	$("#updateGood>button[value='Update']").click(function(){
+	$("#updateGood>tbody>tr>td>button[value='Update']").click(function(){
 		
-		$.get(domain+"getGood/"+$('#updateGood>input[name="goodName"]').val()).then(function(response){
-			$('#updateGood>input[name="goodName"]').val(response.Success.id);
-			$('#updateGood>input[name="barcode"]').val(response.Success.id);
-			$('#updateGood>input[name="company"]').val(response.Success.id);
-			$('#updateGood>input[name="date"]').val(response.Success.name);
-			$('#updateGood>input[name="numGoods"]').val(response.Success.password);
+		$.get(domain+"getGood/"+$('#updateGood>tbody>tr>td>input[name="goodName"]').val()).then(function(response){
+			$('#updateGood>tbody>tr>td>input[name="goodName"]').val(response.Success.id);
+			$('#updateGood>tbody>tr>td>input[name="barcode"]').val(response.Success.id);
+			$('#updateGood>tbody>tr>td>input[name="company"]').val(response.Success.id);
+			$('#updateGood>tbody>tr>td>input[name="date"]').val(response.Success.name);
+			$('#updateGood>tbody>tr>td>input[name="numGoods"]').val(response.Success.password);
 
 			currentGood = response.Success.id ;
-			$('#updateGood>input').show();
-			$('#updateGood>label').show();
+			$('#updateGood>tbody>tr>td>input').show();
+			$('#updateGood>tbody>tr>td>tbody>tr>td>label').show();
 		});
 
-		$("#updateGood>button[value='Update']").hide();
-		$("#updateGood>button[value='Save']").show();
+		$("#updateGood>tbody>tr>td>button[value='Update']").hide();
+		$("#updateGood>tbody>tr>td>button[value='Save']").show();
 	});
 
 
-	$("#updateGood>button[value='Save']").click(function(){
-		$.get(domain+currentGood+"/"+'updateGood/'+$('#updateGood>input[name="barcode"]').val()+"/" +
-			  $('#updateGood>input[name="goodName"]').val()+"/" + $('#updateGood>input[name="company"]').val()+
-			  $('#updateGood>input[name="date"]').val()+"/" + $('#updateGood>input[name="numGoods"]').val()).then(function(response)
+	$("#updateGood>tbody>tr>td>button[value='Save']").click(function(){
+		$.get(domain+currentGood+"/"+'updateGood/'+$('#updateGood>tbody>tr>td>input[name="barcode"]').val()+"/" +
+			  $('#updateGood>tbody>tr>td>input[name="goodName"]').val()+"/" + $('#updateGood>tbody>tr>td>input[name="company"]').val()+
+			  $('#updateGood>tbody>tr>td>input[name="date"]').val()+"/" + $('#updateGood>tbody>tr>td>input[name="numGoods"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{
@@ -290,8 +291,8 @@ $(document).ready(function(){
 	});
 
 
-	$("#deleteGood>button").click(function(){
-		$.get(domain+'deleteGood/'+$('#deleteGood>input[name="barcode"]').val()).then(function(response)
+	$("#deleteGood>tbody>tr>td>button").click(function(){
+		$.get(domain+'deleteGood/'+$('#deleteGood>tbody>tr>td>input[name="barcode"]').val()).then(function(response)
 		{
 			if (response.Success)
 			{

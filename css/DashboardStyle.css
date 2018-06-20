@@ -86,10 +86,6 @@ select
 	border-radius: 5px;
 	display: block;
 	margin: 20px 10px;
-
-	/*border-right-style: solid;
-	border-right-color: #7A96C5;
-	border-right-width: 3px; */
 }
 
 #display
@@ -97,16 +93,11 @@ select
 	width: 45%;
 	height: 70%;
 	float: left;
-	/*border: solid #7A96C5;
-	border-radius: 5px;
-	display: block;
-	margin: 20px 20px;
-	*/
 }
 
 #inputFields
 {
-	width: 300px;
+	width: 80%;
 	margin: 50px auto ;
 }
 
@@ -118,7 +109,7 @@ input[type="text"], input[type="number"],input[type="date"],input[type="password
 	margin: 10px auto ;
 }
 
-div>button
+div>table>tbody>tr>td>button
 {
 	border-radius: 5px;
 	width: 60px;
@@ -159,4 +150,23 @@ th
 {
 	background-color: #7A96C5;
 	color: white;	
+}
+
+#inputFields>table>tbody>tr>td , #inputFields>table
+{
+	border: none;
+}
+
+ #inputFields>table
+ {
+ 	width: 60%;
+ 	display: block;
+ 	margin: 0px auto;
+ }
+
+#inputFields>table>tbody>tr>td 
+{
+	text-align: left;
+	padding: 0px;
+	width: 40%;
 }

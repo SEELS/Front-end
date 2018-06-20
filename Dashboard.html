@@ -40,111 +40,254 @@
 		  	</select>
 
 		  	<div id="inputFields">
-				<div id="addTruck" style="display: none;" class="formContents">
-					<label>Truck ID:</label> 
-					<input type="text" name="truckID">
-					<br>
-					<button value="Add">Add</button>
-				</div>
+				<table id="addTruck" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Truck ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="truckID">
+						</td>	
+					</tr>
+					<tr>
+						<td>
+							<button value="Add">Add</button>
+						</td>
+					</tr>
+				</table>	
+				<table id="addDriver" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Driver National ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="driverID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Driver Name:</label> 
+						</td>
+						<td>
+							<input type="text" name="driverName">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Driver Password:</label> 
+						</td>
+						<td>
+							<input type="Password" name="driverPassword">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Add">Add</button>
+						</td>
+					</tr>
+				</table>
+						
+				<table id="addGood" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Barcode: </label> 
+						</td>
+						<td>
+							<input type="text" name="barcode">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Name:</label> 
+						</td>
+						<td>
+							<input type="text" name="goodName">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Company:</label> 
+						</td>
+						<td>
+							<input type="text" name="company">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Date: </label>
+						</td>
+						<td>
+							<input type="date" name="date">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label>Available Number: </label>
+						</td>
+						<td>
+							<input type="Number" name="numGoods">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Add">Add</button>
+						</td>
+					</tr>
+				</table>
 
-				<div id="addDriver" style="display: none;" class="formContents">
-					<label>Driver National ID:</label> 
-					<input type="text" name="driverID">
-					<br>
-					<label>Driver Name:</label> 
-					<input type="text" name="driverName">
-					<br>
-					<label>Driver Password:</label> 
-					<input type="Password" name="driverPassword">
-					<br>
-					<button value="Add">Add</button>
-				</div>
-				
-				<div id="addGood" style="display: none;" class="formContents">
-					<label>Barcode: </label> 
-					<input type="text" name="barcode">
-					<br>
-					<label>Name:</label> 
-					<input type="text" name="goodName">
-					<br>
-					<label>Company:</label> 
-					<input type="text" name="company">
-					<br>
-					<label>Date: </label>
-					<input type="date" name="date">
-					<br>
-					<label>Available Number: </label>
-					<input type="Number" name="numGoods">
-					<br>
-					<button value="Add">Add</button>
-				</div>
+				<table id="updateTruck" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Truck ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="truckID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Update">Update</button>
+						</td>
+						<td>
+							<button value="Save" style="display: none;" >Save</button>
+						</td>
+					</tr>
+				</table>
 
-				<div id="updateTruck" style="display: none;" class="formContents">
-					<label>Truck ID:</label> 
-					<input type="text" name="truckID">
-					<br>
-					<button value="Update">Update</button>
-					<button value="Save" style="display: none;" >Save</button>
-				</div>
+				<table id="updateDriver" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Driver ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="driverID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Driver Name:</label> 
+						</td>
+						<td>
+							<input style="display: none;" type="text" name="driverName">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Driver Password:</label> 
+						</td>
+						<td>
+							<input style="display: none;" type="Password" name="driverPassword">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Update">Update</button>
+						</td>
+						<td>
+							<button value="Save" style="display: none;" >Save</button>
+						</td>
+					</tr>
+				</table>
+						
+				<table id="updateGood" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Barcode: </label> 
+						</td>
+						<td>
+							<input type="text" name="barcode">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Name:</label> 
+						</td>
+						<td>
+							<input style="display: none;" type="text" name="goodName">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Company:</label> 
+						</td>
+						<td>
+							<input style="display: none;" type="text" name="company">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Date: </label>
+						</td>
+						<td>
+							<input style="display: none;" type="date" name="date">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<label style="display: none;">Available Number: </label>
+						</td>
+						<td>
+							<input style="display: none;" type="Number" name="numGoods">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Update">Update</button>
+						</td>
+						<td>
+							<button value="Save" style="display: none;" >Save</button>
+						</td>
+					</tr>
+				</table>
 
-				<div id="updateDriver" style="display: none;" class="formContents">
-					<label>Driver ID:</label> 
-					<input type="text" name="driverID">
-					<br>
-					<label style="display: none;">Driver Name:</label> 
-					<input style="display: none;" type="text" name="driverName">
-					<br>
-					<label style="display: none;">Driver Password:</label> 
-					<input style="display: none;" type="Password" name="driverPassword">
-					<br>
-					<button value="Update">Update</button>
-					<button value="Save" style="display: none;" >Save</button>
-				</div>
-				
-				<div id="updateGood" style="display: none;" class="formContents">
-					<label>Barcode: </label> 
-					<input type="text" name="barcode">
-					<br>
-					<label style="display: none;">Name:</label> 
-					<input style="display: none;" type="text" name="goodName">
-					<br>
-					<label style="display: none;">Company:</label> 
-					<input style="display: none;" type="text" name="company">
-					<br>
-					<label style="display: none;">Date: </label>
-					<input style="display: none;" type="date" name="date">
-					<br>
-					<label style="display: none;">Available Number: </label>
-					<input style="display: none;" type="Number" name="numGoods">
-					<br>
-					<button value="Update">Update</button>
-					<button value="Save" style="display: none;" >Save</button>
-				</div>
+				<table id="deleteTruck" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Truck ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="truckID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Delete">Delete</button>
+						</td>
+					</tr>
+				</table>
 
+				<table id="deleteDriver" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Driver ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="driverID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Delete">Delete</button>
+						</td>
+					</tr>
+				</table>
 
-				<div id="deleteTruck" style="display: none;" class="formContents">
-					<label>Truck ID:</label> 
-					<input type="text" name="truckID">
-					<br>
-					<button value="Delete">Delete</button>
-				</div>
-
-				<div id="deleteDriver" style="display: none;" class="formContents">
-					<label>Driver ID:</label> 
-					<input type="text" name="driverID">
-					<br>
-					<button value="Delete">Delete</button>
-				</div>
-
-				<div id="deleteGood" style="display: none;" class="formContents">
-					<label>Barcode:</label> 
-					<input type="text" name="barcode">
-					<br>
-					<button value="Delete">Delete</button>
-				</div>
-
+				<table id="deleteGood" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Barcode:</label> 
+						</td>
+						<td>
+							<input type="text" name="barcode">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="Delete">Delete</button>
+						</td>
+					</tr>
+				</table>
 			</div>
-
 		</section>
 
 		<section id="display">
