@@ -114,7 +114,7 @@ $("document").ready(function(){
     // Max Num available of the selected good
      $('#goodName').on('change', function() {
         var barcode = $('#goodName :selected').val() ;
-        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
+        $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
             $("#goodsCount").attr("max" , response);
         });
       })
@@ -127,7 +127,7 @@ $("document").ready(function(){
         var barcode = $('#goodName :selected').val() ;
         var available = 0 ;
 
-        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
+        $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
             available = response ;
         });
 
@@ -229,7 +229,7 @@ $("document").ready(function(){
 
     showTrucks();
     showDrivers();
-    //showGoods();
+    showGoods();
      
 });
 

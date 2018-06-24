@@ -17,7 +17,7 @@ $(document).ready(function(){
 			var arr = response ;
 			var text = "" ;
 			$("#display").html("");
-			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>SSN</th><th>Rate</th></tr>" ;
+			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>National ID</th><th>Rate</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
 				text += "<tr><td>"+arr[i].driver_id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].ssn + "</td><td>"  + arr[i].rate + "</td></tr>" ; 
