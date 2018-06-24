@@ -62,18 +62,14 @@ h2
 
 select
 {
-	display: block;
 	border-radius: 5px;
 	width: 150px;
 	height: 25px;
-	margin: 20px auto ;
-
-
 }
 
-#crudAction
+#selectInput>tbody>tr>td>select
 {
-	margin-top: 50px;
+	margin-top: 35px;
 }
 
 #input
@@ -117,16 +113,15 @@ div>table>tbody>tr>td>button
 	margin: 20px auto ;
 }
 
-
 #go
 {
 	border-radius: 5px;
 	width: 60px;
 	height: 25px;
+	margin: 20px;
 	position: relative;
-	left: 450px;
+	left: 120px;
 }
-
 
 table
 {
@@ -139,11 +134,21 @@ table
 	margin: 20px auto;
 }
 
+tbody
+{
+	width: 100%;
+}
+
 th, td
 {
 	border: solid #7A96C5 1px;
 	padding: 7px;
 	width: 20%;
+}
+
+.smallTable
+{
+	width: 80%;
 }
 
 th
@@ -152,19 +157,19 @@ th
 	color: white;	
 }
 
-#inputFields>table>tbody>tr>td , #inputFields>table
+#inputFields>table>tbody>tr>td , #inputFields>table , #selectInput, #selectInput>tbody>tr>td
 {
 	border: none;
 }
 
- #inputFields>table
+ #inputFields>table , #selectInput
  {
  	width: 60%;
  	display: block;
  	margin: 0px auto;
  }
 
-#inputFields>table>tbody>tr>td 
+#inputFields>table>tbody>tr>td , #selectInput>tbody>tr>td
 {
 	text-align: left;
 	padding: 0px;

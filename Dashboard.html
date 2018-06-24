@@ -26,18 +26,30 @@
 
 
 	  	<section id="input">
-	  		<h2>Dashboard</h2>
-		  	<select name="crudAction" id="crudAction" >
-		  		<option name="add">Add</option>
-		  		<option name="update">Update</option>
-		  		<option name="delete">Delete</option>
-		  	</select>
-		  	<button id="go">Go</button>
-		  	<select name="object"  id="object">
-		  		<option name="truck">Truck</option>
-		  		<option name="driver">Driver</option>
-		  		<option name="goods">Goods</option>
-		  	</select>
+	  		<h2>Dashboard</h2>	  	
+	  		<table id="selectInput">
+	  			<tr>
+		  			<td>
+					  	<select name="crudAction" id="crudAction" >
+					  		<option name="add">Add</option>
+					  		<!--<option name="update">Update</option>-->
+					  		<option name="delete">Delete</option>
+					  	</select>
+				  	</td>
+				  	<td>
+				  	<select name="object"  id="object">
+				  		<option name="truck">Truck</option>
+				  		<option name="driver">Driver</option>
+				  		<option name="goods">Goods</option>
+				  	</select>
+				  </td>
+				</tr>
+				<tr>
+					<td>
+						<button id="go">Go</button>
+					</td>
+				</tr>
+			</table>
 
 		  	<div id="inputFields">
 				<table id="addTruck" style="display: none;" class="formContents">

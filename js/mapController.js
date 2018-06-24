@@ -20,7 +20,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		
 		function getLocation(t , callback , len)
 		{
-		   	return $http.get(domain+'viewTruckLocation/' + t.id).then(function(response) {
+		   	return $http.get(domain+'viewCurrentTruckLocation/' + t.id).then(function(response) {
 		   		console.log(response);
 				t.longitude = response.data.Success.lon;
 				t.latitude = response.data.Success.lat;

@@ -99,7 +99,7 @@ function initMap() {
 
 function getPosition(truckId) {
 
-	$.get(domain+"viewTruckLocation/" + truckId).then (function(response) {
+	$.get(domain+"viewCurrentTruckLocation/" + truckId).then (function(response) {
 		data = response.Success ;
 		latitude[truckId] = data.lat;
 		longitude[truckId] = data.lon;

@@ -14,10 +14,10 @@ $(document).ready(function(){
 	{
 		$.get(domain+'getAllDrivers/').then(function(response)
 		{
-			var arr = response ;
+			var arr = response.Success || [] ;
 			var text = "" ;
 			$("#display").html("");
-			var text = "<table><tr><th>Driver ID</th><th>Name</th><th>SSN</th><th>Rate</th></tr>" ;
+			var text = "<table class='smallTable'><tr><th>Driver ID</th><th>Name</th><th>National ID</th><th>Rate</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
 				text += "<tr><td>"+arr[i].driver_id + "</td><td>" + arr[i].name + "</td><td>" + arr[i].ssn + "</td><td>"  + arr[i].rate + "</td></tr>" ; 
@@ -31,10 +31,11 @@ $(document).ready(function(){
 	{
 		$.get(domain+'getAllTrucks/').then(function(response)
 		{
-			var arr = response ;
+			var arr = response.Success || [] ;
 			var text = "" ;
 			$("#display").html("");
 			var text = "<table><tr><th>Truck ID</th><th>Current Speed</th><th>Driver ID</th><th>Name</th><th>Rate</th></tr>" ;
+
 			for (var i=0 ; i< arr.length ; i++)
 			{
 				if (arr[i].driver)
@@ -54,10 +55,10 @@ $(document).ready(function(){
 	{
 		$.get(domain+'getAllGoods/').then(function(response)
 		{
-			var arr = response ;
+			var arr = response.Success || [] ; ;
 			var text = "" ;
 			$("#display").html("");
-			var text = "<table><tr><th>Barcode</th><th>Name</th><th>Company</th><th>Available Number</th></tr>" ;
+			var text = "<table class='smallTable'><tr><th>Barcode</th><th>Name</th><th>Company</th><th>Available Number</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
 				text += "<tr><td>" + arr[i].barcode + "</td><td>" + arr[i].name + "</td><td>"+arr[i].company + "</td><td>" 
@@ -163,6 +164,7 @@ $(document).ready(function(){
 	});
 
 	$("#deleteTruck>tbody>tr>td>button").click(function(){
+		console.log(domain+'deleteTruck/'+$('#deleteTruck>tbody>tr>td>input[name="truckID"]').val());
 		$.get(domain+'deleteTruck/'+$('#deleteTruck>tbody>tr>td>input[name="truckID"]').val()).then(function(response)
 		{
 			if (response.Success)
@@ -244,6 +246,7 @@ $(document).ready(function(){
 			  $('#addGood>tbody>tr>td>input[name="company"]').val()+"/" + $('#addGood>tbody>tr>td>input[name="barcode"]').val()+"/"+
 			  $('#addGood>tbody>tr>td>input[type="date"]').val()+"/" + $('#addGood>tbody>tr>td>input[name="numGoods"]').val()).then(function(response)
 		{
+			console.log($('#addGood>tbody>tr>td>input[type="date"]').val());
 			if (response.Success)
 			{
 				alert("Good Added Successfully") ;

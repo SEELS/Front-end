@@ -25,7 +25,7 @@ $(document).ready(function (){
 		// SHOW THE TRUCK FOR THE SELECTED TRIP ON THE MAP
 		var truckID = $("#trip").val();
 		// 1) GET LOCATION AND ADD MARKER
-		$.get(domain+'viewTruckLocation/' + truckID).then(function(response) {
+		$.get(domain+'viewCurrentTruckLocation/' + truckID).then(function(response) {
 				lon = response.Success.lon;
 				lat = response.Success.lat;
 				var flightPath = addMarker(new google.maps.LatLng(lat , lon) ,trucks[i].id);
@@ -35,7 +35,7 @@ $(document).ready(function (){
 			});
 		
 		// SHOW GOODS
-		$.get(domain+'getGoods/' + truckID).then(function(response) {
+		$.get(domain+'getGoodByTruckID/' + truckID).then(function(response) {
 
 			var goods = "<table><tr><th class='num'>#</th><th class='barcode'>Barcode</th><th class='name'>Good Name</th>"
 						+"<th class='qty'>Quantity</th></tr>";

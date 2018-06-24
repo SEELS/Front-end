@@ -34,7 +34,7 @@ $(document).ready(function (){
 		});
 
 		// DISPLAY GOOD'S DETAILS
-		$.get(domain+"getGoodDetails/" + barcode).then(function(response){
+		$.get(domain+"getGood/" + barcode).then(function(response){
 			
 			var good = response; 
 			goodDetails += "<h4>Barcode: </h4>"+ good.barcode;

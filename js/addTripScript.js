@@ -14,7 +14,7 @@ $("document").ready(function(){
 	{
 		$.get(domain+'getAllDrivers/').then(function(response)
 		{
-			var arr = response ;
+			var arr = response.Success ;
 			var drivers = "" ;
             
             for (var i=0 ; i< arr.length ; i++)
@@ -30,7 +30,7 @@ $("document").ready(function(){
 	{
 		$.get(domain+'getAllTrucks/').then(function(response)
 		{
-            var arr = response ;
+            var arr = response.Success ;
             var trucks = "";
 			for (var i=0 ; i< arr.length ; i++)
 			{
@@ -44,7 +44,7 @@ $("document").ready(function(){
 	{
 		$.get(domain+'getAllGoods/').then(function(response)
 		{
-            var arr = response ;
+            var arr = response.Success ;
             var goods = "";
 			for (var i=0 ; i< arr.length ; i++)
 			{
@@ -114,8 +114,9 @@ $("document").ready(function(){
     // Max Num available of the selected good
      $('#goodName').on('change', function() {
         var barcode = $('#goodName :selected').val() ;
-        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
-            $("#goodsCount").attr("max" , response);
+        console.log(domain+"getAvaliablityOfNumOfGoods/" +barcode);
+        $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
+            $("#goodsCount").attr("max" , response.Success);
         });
       })
 
@@ -127,24 +128,33 @@ $("document").ready(function(){
         var barcode = $('#goodName :selected').val() ;
         var available = 0 ;
 
-        $.get(domain+"getAvailiablityOfNumOfGoods/" +barcode).then(function(response){
-            available = response ;
+        $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
+            available = response.Success ;
+            var temp = Number($("#"+name+">.count").html()) || 0;
+            var total = Number(temp) + Number(count);
+            if ( total > available)
+            {
+                alert("Maximum number available is " + available);
+                return;
+            }
+            else if (total < 0)
+            {
+                alert("Invalid Number!");
+                return;
+            }
+            else if (goodsArr[name])
+            {
+                $("#"+name+">.count").html(Number($("#"+name+">.count").html())+Number(count));
+                goodsArr[name] += count ;
+            }
+            else
+            {
+                goodsArr[name] = count ;
+                var tr = "<tr id=" + name +"><td>"+name+"</td><td class='count'>"+count+"</td><td>"+available+"</td></tr>";
+                $("#goodsTable").append(tr);
+            }
+            $("#goodsTable").show();
         });
-
-        if (goodsArr[name])
-        {
-            $("#"+name+">.count").html(Number($("#"+name+">.count").html())+Number(count));
-            goodsArr[name] += count ;
-        }
-        else
-        {
-            goodsArr[name] = count ;
-            var tr = "<tr id=" + name +"><td>"+name+"</td><td class='count'>"+count+"</td><td>"+available+"</td></tr>";
-            $("goodsTable").append(tr);
-        }
-
-        $("goodsTable").show();
-
     })
 
     //Add trip -> save road if new then save the trip
@@ -170,8 +180,8 @@ $("document").ready(function(){
                 if (response.Success)
                 {
                     roadID = response.Success;
-                     $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
-                          "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response2){
+                    $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
+                           "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response2){
                             if (response2.Success)
                             {
                                 alert("Trip Saved Successfully");
@@ -212,6 +222,12 @@ $("document").ready(function(){
             $("#goodsArea").show();
             $("#doneGoods").show();
             $("#goodsTable").show();   
+
+            var barcode =  $('#goodName').find("option:first-child").val() ;
+            console.log(domain+"getAvaliablityOfNumOfGoods/" +barcode);
+            $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
+                 $("#goodsCount").attr("max" ,response.Success);
+            });
         }
     });
 
@@ -229,7 +245,7 @@ $("document").ready(function(){
 
     showTrucks();
     showDrivers();
-    //showGoods();
+    showGoods();
      
 });
 
