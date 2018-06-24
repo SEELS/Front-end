@@ -114,7 +114,7 @@ $("document").ready(function(){
     // Max Num available of the selected good
      $('#goodName').on('change', function() {
         var barcode = $('#goodName :selected').val() ;
-        console.log(domain+"getAvaliablityOfNumOfGoods/" +barcode);
+
         $.get(domain+"getAvaliablityOfNumOfGoods/" +barcode).then(function(response){
             $("#goodsCount").attr("max" , response.Success);
         });
@@ -132,6 +132,7 @@ $("document").ready(function(){
             available = response.Success ;
             var temp = Number($("#"+name+">.count").html()) || 0;
             var total = Number(temp) + Number(count);
+            console.log(response);
             if ( total > available)
             {
                 alert("Maximum number available is " + available);
@@ -142,14 +143,14 @@ $("document").ready(function(){
                 alert("Invalid Number!");
                 return;
             }
-            else if (goodsArr[name])
+            else if (goodsArr[barcode])
             {
                 $("#"+name+">.count").html(Number($("#"+name+">.count").html())+Number(count));
-                goodsArr[name] += count ;
+                goodsArr[barcode] += count ;
             }
             else
             {
-                goodsArr[name] = count ;
+                goodsArr[barcode] = count ;
                 var tr = "<tr id=" + name +"><td>"+name+"</td><td class='count'>"+count+"</td><td>"+available+"</td></tr>";
                 $("#goodsTable").append(tr);
             }
