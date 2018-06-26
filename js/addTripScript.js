@@ -4,7 +4,8 @@ $("document").ready(function(){
     //var domain = "http://localhost:8080/";
     var domain = "https://seelsapp.herokuapp.com/";
     var lat ,lng;
-    var roadLine , roadID=-1;
+    var roadLine="new";
+    var roadID=-1;
     var goodsArea = false ;
     var goodsArr = [] ;
     var goodsParam = "";
@@ -101,7 +102,8 @@ $("document").ready(function(){
         $.get(domain+"getRoad/" + $( "#exRoads option:selected" ).val()).then(function(response)
 		{
             var road = response.Success;
-         //   roadLine.setMap(null);      // Remove the old road
+            if (roadLine != "new")
+               roadLine.setMap(null);               // Remove the old road
             roadLine = highlightRoad(road);
 		});
     });
@@ -162,13 +164,19 @@ $("document").ready(function(){
     $("#submit").click(function(){
 
         // PREPARE THE GOODS PARAMETER STRING
+
+        if (goodsArr.length == 0)
+        {
+            alert("Please add some goods to the trip");
+            return;
+        }
+
         for (var good in goodsArr) 
         {
             if (goodsArr[good] == 0)
                 continue; 
             goodsParam += good + ":" + goodsArr[good] +",";
         }
-
         // remove the last "," placed after the last item
         goodsParam = goodsParam.substring(0, goodsParam.length - 1); 
 

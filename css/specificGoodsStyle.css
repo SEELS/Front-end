@@ -40,7 +40,7 @@ section>h3
 	width: 96.75%;
 }
 
-#tripGoods>h3 , #displayGood>h3
+#tripGoods>h3 , #displayGood>h3, #displayTrucks>h3
 {
 	width: 92%;
 }
@@ -133,10 +133,10 @@ select
 	margin: 10px;
 }
 
-#displayGood
+#displayGood , #displayTrucks
 {
 	width: 27%;
-	height: 35%;
+	height: 29%;
 	margin:10px;
 	border-radius: 5px;
 	float: right;
@@ -149,5 +149,6 @@ select
 h4
 {
 	display: inline-block;
-	margin: 10px;
+	margin-top: 10px;
+	margin-left: 10px;
 }

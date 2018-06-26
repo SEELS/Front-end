@@ -25,6 +25,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 				t.longitude = response.data.Success.lon;
 				t.latitude = response.data.Success.lat;
 				callback(t , len);
+				
 				return response.data;
 			});
 		}
@@ -35,7 +36,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 			$http.get(domain+"getActiveTrucks")
 			
 			.then(function(response) {
-				$scope.trucks = response.data;
+				$scope.trucks = response.data.Success;
 
 				for (var i = 0 ; i<$scope.trucks.length ; i++)
 				{
