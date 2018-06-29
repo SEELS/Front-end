@@ -7,7 +7,7 @@ $("document").ready(function(){
     var roadLine="new";
     var roadID=-1;
     var goodsArea = false ;
-    var goodsArr = [] ;
+    var goodsArr = {} ;
     var goodsParam = "";
  
     // initialize <select>
@@ -108,6 +108,25 @@ $("document").ready(function(){
 		});
     });
 
+    // Highlights the selected road on the map (existing)
+    $("#allRoads").click(function(){
+        $.get(domain+"getAllRoads/").then(function(response)
+        {
+            var roads = response; 
+            console.log(roads);
+            for (var i=0 ; i<roads.length  ; i++)
+            {
+                var id = roads[i].id;
+                $.get(domain+"getRoad/" + id ).then(function(response2)
+                {
+                    var road = response2.Success;
+                    highlightRoad(road);
+                });
+            }
+        });
+        
+    });
+    
     // update road id on change of "select" value
     $('#exRoads').on('change', function() {
         roadID = this.value;
@@ -134,7 +153,7 @@ $("document").ready(function(){
             available = response.Success ;
             var temp = Number($("#"+name+">.count").html()) || 0;
             var total = Number(temp) + Number(count);
-            console.log(response);
+            console.log(temp +" " + count + " " + total);
             if ( total > available)
             {
                 alert("Maximum number available is " + available);
@@ -148,7 +167,7 @@ $("document").ready(function(){
             else if (goodsArr[barcode])
             {
                 $("#"+name+">.count").html(Number($("#"+name+">.count").html())+Number(count));
-                goodsArr[barcode] += count ;
+                goodsArr[barcode] = Number(goodsArr[barcode]) + Number(count);
             }
             else
             {
@@ -157,6 +176,8 @@ $("document").ready(function(){
                 $("#goodsTable").append(tr);
             }
             $("#goodsTable").show();
+            console.log(Object.keys(goodsArr).length);
+            console.log(goodsArr);
         });
     })
 
@@ -165,7 +186,7 @@ $("document").ready(function(){
 
         // PREPARE THE GOODS PARAMETER STRING
 
-        if (goodsArr.length == 0)
+        if (Object.keys(goodsArr).length == 0)
         {
             alert("Please add some goods to the trip");
             return;
@@ -185,27 +206,29 @@ $("document").ready(function(){
         {
             // SAVE NEW ROAD
             $.get(domain+"saveRoad/"+$("#roadName").val()+"/"+$("#destinationLat").val()+"/"+$("#destinationLng").val()+"/"
-            +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/").then(function(response){
-                if (response.Success)
-                {
-                    roadID = response.Success;
-                    $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
-                           "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response2){
-                            if (response2.Success)
-                            {
-                                alert("Trip Saved Successfully");
-                                $("input").val("");
-                            }
-                            else
-                                alert("Save Trip Error: " + response2.Error);
-                    });
-                }
-                else
-                {
-                    alert("Invalid Road ID ");
-                }
-                //return;
-            });
+                +$("#sourceLat").val()+"/"+$("#sourceLng").val()+"/1/").then(function(response){
+                    if (response.Success)
+                    {
+                        roadID = response.Success;
+                        $.get(domain+"saveTrip/" + $( "#truck option:selected" ).text()+"/" + $( "#driver option:selected" ).val()+
+                               "/0/" + roadID+"/" + $("input[type='date']").val()+"/" + goodsParam).then(function(response2){
+                                if (response2.Success)
+                                {
+                                    alert("Trip Saved Successfully");
+                                    $("input").val("");
+                                }
+                                else
+                                    alert("Save Trip Error: " + response2.Error);
+                        });
+                    }
+                    else
+                    {
+                        alert("Invalid Road ID ");
+                    }
+                    //return;
+                }).fail(function(){
+                    alert("Error! Please Select a road");    
+                });
         }
         else
         {
@@ -218,7 +241,9 @@ $("document").ready(function(){
                 }
                 else
                     alert("Save Trip Error: " + response.Error);
-            });
+            }).fail(function(){
+                    alert("Error! Please Enter all fields");    
+                });
         }    
     });
 

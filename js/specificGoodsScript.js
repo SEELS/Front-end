@@ -37,7 +37,7 @@ $(document).ready(function (){
 			}
 			clearMarkers();
 			showActiveTrucks(trucks);
-			$("#displayTrucks").html("<h3>Selected Trucks</h3>"+trucksList);
+			$("#displayTrucks").html("<h3>Trucks</h3>"+trucksList);
 			$("#displayTrucks").show();
 
 		});

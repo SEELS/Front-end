@@ -6,6 +6,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		var done = false; 
 		var truckArr = [];
 		var location ;
+		var clear = 0 ;
 		
 		function addToArr(truck , len)
 		{
@@ -47,13 +48,18 @@ app.controller("trucksController",function($scope,$http , $q  ){
 		
 		$scope.getTruckData = function(truckId)
 		{
-			$http.get(domain+"viewTruck/"+truckId)
+			$scope.selectedTruck = {} ;
+			clearInterval(clear);
+			clear = setInterval(function(){
+					$http.get(domain+"viewTruck/"+truckId).then(function(response) {
+						$scope.selectedTruck = response.data.Success;
+					})} ,1000); 
 			
-			.then(function(response) {
-			
-			$scope.selectedTruck = response.data.Success;
-			showSpecificTruck($scope.selectedTruck.id);
+			$http.get(domain+"viewTruck/"+truckId).then(function(response) {
+				$scope.selectedTruck = response.data.Success;
+				showSpecificTruck($scope.selectedTruck.id);
 			});
+			
 		}
 	
 	

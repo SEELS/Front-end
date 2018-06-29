@@ -223,12 +223,15 @@ function getTripRoad(truckID)
 	$.get(domain+truckID+'/getTruckTrip/').then(function(response)
 	{
 		// GET LOCATIONS OF ROAD OF A TRIP
-		
-		/*$.get(domain+"returnTrip/" + response.Success.driver.driver_id).then(function(response2)
+		$.get(domain+"returnTrip/" + response.Success.trip_id).then(function(response2)
 		{
-			var road = response2.Success;
-			highlightRoad(road);
+			var roadID = response2.Success[0].road.id;
+			$.get(domain+"getRoad/"+roadID).then(function(road){
+				console.log(road);
+				highlightRoad(road);	
+			});
+			
 
-		});*/
+		});
 	});
 }
