@@ -5,6 +5,8 @@ var flightPath=[];
 var flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates for each truck
 var longitude = new Array() ;
 var latitude = new Array();
+var roads = new Array();
+var chosenTruck ;
 
 // Nav bar
 $("#goods").click(function(){
@@ -22,9 +24,9 @@ function setMapOnAll(map) {
 
 // Removes the markers from the map, but keeps them in the array.
 function clearMarkers() {
-	console.log("clearMarkers");
-	console.log(Object.keys(markers).length);
 	setMapOnAll(null);
+	for (var i = 0; i < Object.keys(flightPath).length; i++) 
+		flightPath[Object.keys(flightPath)[i]].setMap(null); 
 }
 
 function getRandomColor() {
@@ -38,7 +40,7 @@ function getRandomColor() {
 
 function addMarker(location , truckId) {
 		
-	flightPlanCoordinates[truckId] = [];
+	flightPlanCoordinates[truckId] = flightPlanCoordinates[truckId]||[];
 	flightPlanCoordinates[truckId].push(location);
 
 	flightPath[truckId] = new google.maps.Polyline({
@@ -100,6 +102,7 @@ function initMap() {
 function getPosition(truckId) {
 
 	$.get(domain+"viewCurrentTruckLocation/" + truckId).then (function(response) {
+		console.log(domain+"viewCurrentTruckLocation/" + truckId);
 		data = response.Success ;
 		latitude[truckId] = data.lat;
 		longitude[truckId] = data.lon;
@@ -129,9 +132,6 @@ function showActiveTrucks(trucks)
  	for( i=0; i<trucks.length ; i++)
 	{
 		addMarker(new google.maps.LatLng(trucks[i].latitude , trucks[i].longitude) ,trucks[i].id);
-		//var temp = getTrip(trucks[0].id);
-		//alert("Temp:  " + temp);
-		//getRoad(temp);
 		getTripRoad(trucks[i].id);
 		longitude[trucks[i].id] = trucks[i].longitude;
 
@@ -168,9 +168,11 @@ function showActiveTrucks(trucks)
 
 function showSpecificTruck(truckId)
 {
+	chosenTruck = truckId;
 	clearMarkers();
 	getTripRoad(truckId);
 	markers[truckId].setMap(map);
+	flightPath[truckId].setMap(map);
 }
 
 
@@ -218,6 +220,8 @@ function getTrip(id)
 	});
 }
 */
+
+// to highlight roads that trucks must take -> different route detection
 function getTripRoad(truckID)
 {
 	$.get(domain+truckID+'/getTruckTrip/').then(function(response)
@@ -228,10 +232,11 @@ function getTripRoad(truckID)
 			var roadID = response2.Success[0].road.id;
 			$.get(domain+"getRoad/"+roadID).then(function(road){
 				console.log(road);
+				roads[truckID] = road ;
 				highlightRoad(road);	
 			});
 			
 
 		});
 	});
-}
+}	

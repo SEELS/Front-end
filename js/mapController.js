@@ -54,6 +54,7 @@ app.controller("trucksController",function($scope,$http , $q  ){
 					$http.get(domain+"viewTruck/"+truckId).then(function(response) {
 						$scope.selectedTruck = response.data.Success;
 					})} ,1000); 
+			console.log(clear);
 			
 			$http.get(domain+"viewTruck/"+truckId).then(function(response) {
 				$scope.selectedTruck = response.data.Success;

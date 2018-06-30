@@ -32,8 +32,11 @@ $(document).ready(function (){
 			console.log(trips);
 			for (var i=0 ; i<trips.length ; i++)
 			{
-				trucks.push(trips[i].truck) ;
-				trucksList+=trips[i].truck.id+"<br>";
+				if (trips[i].state != 2)
+				{
+					trucks.push(trips[i].truck) ;
+					trucksList+=trips[i].truck.id+"<br>";
+				}
 			}
 			clearMarkers();
 			showActiveTrucks(trucks);
