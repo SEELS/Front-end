@@ -6,6 +6,7 @@ var flightPlanCoordinates = [];		// 2D Array -> array of flightPlanCoordinates f
 var longitude = new Array() ;
 var latitude = new Array();
 var roads = new Array();
+var trucksArr ;
 var chosenTruck ;
 
 // Nav bar
@@ -20,6 +21,10 @@ function setMapOnAll(map) {
    for (var i = 0; i < Object.keys(markers).length; i++) {
       markers[Object.keys(markers)[i]].setMap(map);
    }
+   
+   for (var i = 0; i < Object.keys(flightPath).length; i++) 
+		flightPath[Object.keys(flightPath)[i]].setMap(map); 
+
 }
 
 // Removes the markers from the map, but keeps them in the array.
@@ -126,6 +131,7 @@ function updatePath(truckId) {
 
 function showActiveTrucks(trucks)
 {
+	trucksArr = trucks ;
 	if (trucks.length == 0)
 		return;
 	trips=[];
@@ -240,3 +246,5 @@ function getTripRoad(truckID)
 		});
 	});
 }	
+
+$("#all").click(function(){setMapOnAll(map)});
