@@ -21,6 +21,10 @@ function setMapOnAll(map) {
    for (var i = 0; i < Object.keys(markers).length; i++) {
       markers[Object.keys(markers)[i]].setMap(map);
    }
+   
+   for (var i = 0; i < Object.keys(flightPath).length; i++) 
+		flightPath[Object.keys(flightPath)[i]].setMap(map); 
+
 }
 
 // Removes the markers from the map, but keeps them in the array.
