@@ -15,11 +15,13 @@ $(document).ready(function(){
     	if ($( "#crudAction option:selected" ).val() == "report")
     	{
     		$("#good").hide();
+    		$("#truck").hide();
     		$("#trip").show();
     	}
     	else
     	{
     		$("#good").show();
+    		$("#truck").show();
     		$("#trip").hide();
     	}
     });
@@ -141,7 +143,7 @@ $(document).ready(function(){
               		 + "</td></tr>" ;
                	
               	// TRIP GOODS:
-              /*	text += "<tr><td><h3>Goods:</h3></td><td style='padding:0px;'><table style='width:100%; margin-top:0px;"
+              	text += "<tr><td><h3>Goods:</h3></td><td style='padding:0px;'><table style='width:100%; margin-top:0px;"
               		 + "margin-bottom:0px;border-top-right-radius:0px;border-top-left-radius:0px;'><col width='65'>"
               		 + "<col width='60%'><col width='100%'><tr><th>Barcode</th><th>Name</th><th>Quantity</th></tr>";
               	
@@ -151,22 +153,22 @@ $(document).ready(function(){
     				for (var i=0 ; i<goods.length ; i++)
 	              	{
 	              		text += "<tr value='"+goods[i].barcode+"'><td>" + goods[i].barcode
-	              			 + "</td><td>"+goods[i].name + "</td><td>" + trips[i].num_of_goods+"</td></tr>";
+	              			 + "</td><td>"+goods[i].name + "</td><td>" + goods[i].num_of_goods+"</td></tr>";
 	              	}
-	            */ 
+	             
 	            text += "</table></td></tr></table>";
 				$("#display").html(text);
 
 	           	// VIEW THE PATH OF THE TRIP ON THE MAP
               	var map = initMap();
 
-              	$.get(domain+"getRoad/" +response.Success.road.id ).then(function(road)
+              	$.get(domain+"getActualLocations/" +response.Success.truck.id ).then(function(road)
 				{
 		            var road = road.Success;
 		            var roadFlightPath = highlightRoad(road);
 		            roadFlightPath.setMap(map);
 				});
-			//	});
+			});
 
 			}
 			else
