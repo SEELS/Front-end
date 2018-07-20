@@ -4,10 +4,33 @@ $(document).ready(function(){
 	var currentTruck ;
 	var currentDriver ;
 	var currentGood ;
+	var source , destination ;
 
 	// Nav bar
     $("#goods").click(function(){
         $("#goodsMenu").slideToggle();
+    });
+
+    $("#crudAction").change(function(){
+    	if ($( "#crudAction option:selected" ).val() == "report")
+    	{
+    		$("#good").hide();
+    		$("#trip").show();
+    	}
+    	else
+    	{
+    		$("#good").show();
+    		$("#trip").hide();
+    	}
+    });
+
+    $("#object").change(function(){
+    	if ($( "#object option:selected" ).val() == "good")
+    	{
+    		$("#report").hide();
+    	}
+    	else
+    		$("#report").show();	
     });
 
 	function showDrivers()
@@ -16,7 +39,7 @@ $(document).ready(function(){
 		{
 			var arr = response.Success || [] ;
 			var text = "" ;
-			$("#display").html("");
+			$("#display").html("<h1 class='loading'>Loading...</h1>");
 			var text = "<table class='smallTable'><tr><th>Driver ID</th><th>Name</th><th>National ID</th><th>Rate</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
@@ -33,7 +56,7 @@ $(document).ready(function(){
 		{
 			var arr = response.Success || [] ;
 			var text = "" ;
-			$("#display").html("");
+			$("#display").html("<h1 class='loading'>Loading...</h1>");
 			var text = "<table><tr><th>Truck ID</th><th>Current Speed</th><th>Driver ID</th><th>Name</th><th>Rate</th></tr>" ;
 
 			for (var i=0 ; i< arr.length ; i++)
@@ -57,7 +80,7 @@ $(document).ready(function(){
 		{
 			var arr = response.Success || [] ; ;
 			var text = "" ;
-			$("#display").html("");
+			$("#display").html("<h1 class='loading'>Loading...</h1>");
 			var text = "<table class='smallTable'><tr><th>Barcode</th><th>Name</th><th>Company</th><th>Available Number</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
@@ -68,7 +91,89 @@ $(document).ready(function(){
 			$("#display").html(text);
 		});	
 	}
+
+	function showTrips()
+	{
+		$("#display").html("<h1 class='loading'>Loading...</h1>");
+		$.get(domain+'getAllTrips/').then(function(response)
+		{
+			var arr = response.Success || [] ; ;
+			var text = "" ;
+			var text = "<table class='smallTable'><tr><th>Trip ID</th><th>Driver</th><th>Truck</th><th>Date</th></tr>" ;
+			for (var i=0 ; i< arr.length ; i++)
+			{
+
+				// CONVERT TIMESTAMP TO DATE
+				var fullDate = new Date(arr[i].date) ;
+				var month = fullDate.getUTCMonth() + 1; //months from 1-12
+				var day = fullDate.getUTCDate();
+				var year = fullDate.getUTCFullYear();
+				var date = month + "/" + day + "/" + year ;
+
+				text += "<tr><td>" + arr[i].trip_id + "</td><td>" + arr[i].driver.name + "</td><td>" + arr[i].truck.id
+					 + "</td><td>" + date + "</td></tr>" ;
+
+			}
+
+			$("#display").html(text);
+		});	
+	}
 	
+	function viewTripReport(tripID)
+	{
+		$.get(domain+'getTrip/'+tripID).then(function(response)
+		{
+			if (response.Success)
+			{
+				// CONVERT TIMESTAMP TO DATE
+				var fullDate = new Date(response.Success.date) ;
+				var month = fullDate.getUTCMonth() + 1; //months from 1-12
+				var day = fullDate.getUTCDate();
+				var year = fullDate.getUTCFullYear();
+				var date = month + "/" + day + "/" + year ;
+
+				var text = "<table style='width:82.25%'><col style='width:10%'><col style='width:50%'>";
+              	text += "<tr><th colspan='2'><h1>Trip Report</h1></th></tr><tr><td><h3>ID:</h3></td><td>"
+             		 + response.Success.trip_id + "</td></tr><tr><td><h3>Driver:</h3></td><td>"+ response.Success.driver.name
+             		 + " ( ID: " + response.Success.driver.driver_id + ")" + "</td></tr><tr><td><h3>Trip Rate:</h3></td><td>"
+             		 + response.Success.rate + "</td></tr><tr><td><h3>Date:</h3></td><td>" + date + "</td></tr><tr><td>"
+              		 + "<h3>Road: </h3></td><td>"+response.Success.road.name + "</td></tr><tr><td colspan='2'><div id='map'></div>"
+              		 + "</td></tr>" ;
+               	
+              	// TRIP GOODS:
+              /*	text += "<tr><td><h3>Goods:</h3></td><td style='padding:0px;'><table style='width:100%; margin-top:0px;"
+              		 + "margin-bottom:0px;border-top-right-radius:0px;border-top-left-radius:0px;'><col width='65'>"
+              		 + "<col width='60%'><col width='100%'><tr><th>Barcode</th><th>Name</th><th>Quantity</th></tr>";
+              	
+              	$.get(domain+'getTripGoods/' + tripID).then(function(goods) {
+    				goods = goods.Success || [] ;
+    				
+    				for (var i=0 ; i<goods.length ; i++)
+	              	{
+	              		text += "<tr value='"+goods[i].barcode+"'><td>" + goods[i].barcode
+	              			 + "</td><td>"+goods[i].name + "</td><td>" + trips[i].num_of_goods+"</td></tr>";
+	              	}
+	            */ 
+	            text += "</table></td></tr></table>";
+				$("#display").html(text);
+
+	           	// VIEW THE PATH OF THE TRIP ON THE MAP
+              	var map = initMap();
+
+              	$.get(domain+"getRoad/" +response.Success.road.id ).then(function(road)
+				{
+		            var road = road.Success;
+		            var roadFlightPath = highlightRoad(road);
+		            roadFlightPath.setMap(map);
+				});
+			//	});
+
+			}
+			else
+				alert(response.Error);
+		});
+	}
+
 	$("#go").click(function(){
 		
 		var url = "" ;
@@ -113,14 +218,28 @@ $(document).ready(function(){
 			$("#deleteGood").show();
 			url = "getAllGoods/" ;
 		}
+		else if (crudAction == "View Report" && object == "Truck"){
+			$("#reportTruck").show();
+			url = "getAllTrucks/" ;
+		}
+		else if (crudAction == "View Report" && object == "Trip"){
+			$("#reportTrip").show();
+			url = "getAllTrips/" ;
+		}
+		else if (crudAction == "View Report" && object == "Driver"){
+			$("#reportDriver").show();
+			url = "getAllDrivers/" ;
+		}
 
 		var text = "";
 		if (url == "getAllGoods/")
 			text = showGoods();
 		else if  (url == "getAllDrivers/")
 			text = showDrivers();
-		else 
+		else if (url == "getAllTrucks/")
 			text = showTrucks();
+		else if (url == "getAllTrips/")
+			text = showTrips();
 	});
 
 
@@ -306,6 +425,63 @@ $(document).ready(function(){
 			else
 				alert(response.Error);
 		});
+	});
+
+	$("#reportDriver>tbody>tr>td>button").click(function(){
+		$("#display").html("<h1 class='loading'>Loading...</h1>");
+		$.get(domain+'getDriver/'+$('#reportDriver>tbody>tr>td>input[name="driverID"]').val()).then(function(response)
+		{
+			if (response.Success)
+			{
+
+				$.get(domain+"driverCompletedTrip/" + response.Success.driver_id).then (function (trips) 
+				{
+					trips = trips.Success || [] ;
+					var text = "<table style='width:82.25%'><col style='width:10%'><col style='width:50%'>";
+
+              		text += "<tr><th colspan='2'><h1>Driver Report</h1></th></tr><tr><td><h3>Name:</h3></td><td>"
+              			 + response.Success.name + "</td></tr><tr><td><h3>ID:</h3></td><td>"+ response.Success.driver_id 
+              			 + "</td></tr><tr><td><h3>Rate:</h3></td><td>" + response.Success.rate
+              			 + "</td></tr><tr><td><h3>Completed Trips:</h3></td>" ;
+
+               		if (trips.length == 0)
+              		{
+              			text += "<td>None</td>" ;
+              			text += "</table></td></tr></table>";
+						$("#display").html(text);
+						return ;
+              		}
+
+              		// TRIPS DETAILS:
+              		text += "<td style='padding:0px;'><table style='width:100%; margin-top:0px;margin-bottom:0px;"
+              			 + "border-top-right-radius:0px;border-top-left-radius:0px;'><col width='65'><col width='60%'>"
+              			 + "<col width='100%'><tr><th>Date</th><th>Road</th><th>Rate</th></tr>";
+              		for (var i=0 ; i<trips.length ; i++)
+              		{
+		             	// CONVERT TIMESTAMP TO DATE
+						var fullDate = new Date(trips[i].date) ;
+						var month = fullDate.getUTCMonth() + 1; //months from 1-12
+						var day = fullDate.getUTCDate();
+						var year = fullDate.getUTCFullYear();
+						var date = month + "/" + day + "/" + year ;
+              			text += "<tr value='"+trips[i].trip_id+"' onclick='viewTripReport("+trips[i].trip_id+")'><td>" + date
+              				 + "</td><td>"+trips[i].road.name + "</td><td>" + trips[i].rate+"</td></tr>";
+              		}
+
+              		text += "</table></td></tr></table>";
+					$("#display").html(text);
+              	});
+
+			}
+			else
+				alert(response.Error);
+		});
+	});
+
+	$("#reportTrip>tbody>tr>td>button").click(function(){
+		$("#display").html("<h1 class='loading'>Loading...</h1>");
+		viewTripReport($('#reportTrip>tbody>tr>td>input[name="tripID"]').val());
+		
 	});
 
 });

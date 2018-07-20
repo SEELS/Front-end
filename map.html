@@ -32,7 +32,8 @@
 		<aside>
 			<div id="activeTrucks" ng-init="getActiveTrucks()">
 				
-				<h3 class="header">Active Trucks</h3>
+				<h3 class="header">Active Trucks<label id="all">Show All</label></h3>
+
 				<div ng-repeat="truck in trucks" ng-click="getTruckData(truck.id)" >
 					<label class="truckId" ng-click="getTruckData(truck.id)"> {{truck.id}} </label>
 				</div>
@@ -47,9 +48,9 @@
 				<label>Speed: </label>{{selectedTruck.currentSpeed}}<label>KPH</label><br>
 				<label>{{selectedTruck.tripID}}</label><br>
 				<h3 class="header" id="driver">Driver</h3><br>
-				<label>{{selectedTruck.driver.name}}</label><br>
-				<label>{{selectedTruck.driver.ssn}}</label><br>
-				<label>{{selectedTruck.driver.rate}}</label><br>
+				<label>Name: {{selectedTruck.driver.name}}</label><br>
+				<label>National ID: {{selectedTruck.driver.ssn}}</label><br>
+				<label>Rate: {{selectedTruck.driver.rate}}</label><br>
 			</div>
 			
 			

@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" type="text/css" href="css/DashboardStyle.css">	  
     <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/DashboardScript.js"></script>
+    <script type="text/javascript" src="http://maps.google.com/maps/api/js"></script>
 
   </head>
   <body>
@@ -21,7 +21,7 @@
 					<li><a href="tripGoods.html">Trip's Goods</a></li>
 					<li><a href="specificGoods.html">Specific Goods</a></li>
 				</ul>
-	  		<a href="index.html">Logout</a>
+			<a href="index.html">Logout</a>
 	  	</nav>
 
 
@@ -31,16 +31,18 @@
 	  			<tr>
 		  			<td>
 					  	<select name="crudAction" id="crudAction" >
-					  		<option name="add">Add</option>
+					  		<option value="add" name="add">Add</option>
+					  		<option value="report" name="report" id="report">View Report</option>
 					  		<!--<option name="update">Update</option>-->
-					  		<option name="delete">Delete</option>
+					  		<option value="delete" name="delete">Delete</option>
 					  	</select>
 				  	</td>
 				  	<td>
 				  	<select name="object"  id="object">
 				  		<option name="truck">Truck</option>
 				  		<option name="driver">Driver</option>
-				  		<option name="goods">Goods</option>
+				  		<option name="goods" id="good" value="good">Goods</option>
+				  		<option name="trip" style="display: none;" id="trip">Trip</option>
 				  	</select>
 				  </td>
 				</tr>
@@ -299,6 +301,55 @@
 						</td>
 					</tr>
 				</table>
+
+				<table id="reportTruck" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Truck ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="truckID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="View Report">View Report</button>
+						</td>
+					</tr>
+				</table>
+
+				<table id="reportDriver" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Driver ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="driverID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="View Report">View Report</button>
+						</td>
+					</tr>
+				</table>
+
+				<table id="reportTrip" style="display: none;" class="formContents">
+					<tr>
+						<td>
+							<label>Trip ID:</label> 
+						</td>
+						<td>
+							<input type="text" name="tripID">
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<button value="View Report">View Report</button>
+						</td>
+					</tr>
+				</table>
+
 			</div>
 		</section>
 
@@ -306,7 +357,8 @@
 		
 		</section>
 
-		
+	    <script src="js/mapScript.js" ></script>
+		<script type="text/javascript" src="js/DashboardScript.js"></script>    
 
-  </body>
+  	</body>
 </html>
