@@ -8,6 +8,10 @@ var latitude = new Array();
 var roads = new Array();
 var trucksArr ;
 var chosenTruck ;
+var notificationsList = [] ;
+
+var audio = document.getElementById("beep");
+
 
 // Nav bar
 $("#goods").click(function(){
@@ -247,4 +251,60 @@ function getTripRoad(truckID)
 	});
 }	
 
+// SHOW ALL TRUCKS' MARKERS ON THE MAP
 $("#all").click(function(){setMapOnAll(map)});
+
+
+// NOTIFICATIONS
+
+function showNotification(content, ID)
+{
+	$("#notificationsContent").append("<div class='notification' id= '"+ID+
+										"'onclick='removeNotification("+ID+")'>"+content+"</div>");
+}
+
+function removeNotification(ID)
+{
+	$("#"+ID).hide();
+	
+console.log(notificationsList);
+
+	// REMOVE THIS NOTIFICATION FROM THE ARRAY
+	notificationsList = $.grep(notificationsList, function(value) {
+		  return value.id != ID;
+		});
+
+	console.log(notificationsList);
+
+	if (notificationsList.length == 0)
+		audio.pause();
+}
+
+var notificationsVar = setInterval(function(){
+		$.get(domain+"getUnseenNotification/").then(function(response)
+		{
+			if (response.Success && response.Success!="Empty, all messages are seen!")
+			{
+				audio.play();
+				notificationsList = response.Success;
+				var states = "" ;
+				for (var i=0 ; i<notificationsList.length ; i++)
+				{
+					showNotification(notificationsList[i].content ,notificationsList[i].id );
+					states+=notificationsList[i].id +",";
+				}
+				
+				states.slice(0,-1); 		// REMOVE LAST ','
+
+				$.get(domain+"changeNotificationState/"+states).then(function(response2){});
+			}
+		})
+	}, 60000);
+
+
+/*
+notificationsList = [{id : 1 , content: "TEST"},{id : 2 , content: "TEST2"}]
+audio.play();
+showNotification("TEST" , 1);
+showNotification("TEST2" ,2);
+*/

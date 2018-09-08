@@ -101,7 +101,7 @@ $(document).ready(function(){
 		{
 			var arr = response.Success || [] ; ;
 			var text = "" ;
-			var text = "<table class='smallTable'><tr><th>Trip ID</th><th>Driver</th><th>Truck</th><th>Date</th></tr>" ;
+			var text = "<table class='tripsTable'><tr><th>Trip ID</th><th>Driver</th><th>Truck</th><th>Date</th></tr>" ;
 			for (var i=0 ; i< arr.length ; i++)
 			{
 
@@ -117,6 +117,7 @@ $(document).ready(function(){
 
 			}
 
+			text += "</table>";
 			$("#display").html(text);
 		});	
 	}
@@ -162,7 +163,8 @@ $(document).ready(function(){
 	           	// VIEW THE PATH OF THE TRIP ON THE MAP
               	var map = initMap();
 
-              	$.get(domain+"getActualLocations/" +response.Success.truck.id ).then(function(road)
+              	//$.get(domain+"getActuallLocations/" +response.Success.truck.id ).then(function(road)
+                $.get(domain+"getRoad/" +response.Success.road.id ).then(function(road)
 				{
 		            var road = road.Success;
 		            var roadFlightPath = highlightRoad(road);
@@ -466,7 +468,7 @@ $(document).ready(function(){
 						var day = fullDate.getUTCDate();
 						var year = fullDate.getUTCFullYear();
 						var date = month + "/" + day + "/" + year ;
-              			text += "<tr value='"+trips[i].trip_id+"' onclick='viewTripReport("+trips[i].trip_id+")'><td>" + date
+              			text += "<tr value='"+trips[i].trip_id+"' onclick='function(){viewTripReport("+trips[i].trip_id+");alert('beep';)}'><td>" + date
               				 + "</td><td>"+trips[i].road.name + "</td><td>" + trips[i].rate+"</td></tr>";
               		}
 

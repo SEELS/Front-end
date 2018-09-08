@@ -12,6 +12,39 @@
 	border-radius: 5px;
 }
 
+#notificationsList
+{
+	width:275px;
+	height: 91%;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	display: table-cell;
+  	vertical-align: bottom;
+}
+
+.notification
+{
+	width:275px;
+	min-height: 40px;
+  	background-color: red;
+  	border-radius: 5px;
+  	border-color: white;
+  	color: white;
+  	font-weight: bold;
+  	padding: 5px;
+  	margin-top: 5px;
+}
+
+#notificationsContent 
+{
+	max-height: 91%;
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+  	overflow: auto;
+}
+
 section
 {
 	height: 87%;

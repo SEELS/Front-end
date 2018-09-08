@@ -156,6 +156,11 @@ th, td
 	width : 80%;
 }
 
+.tripsTable>tbody>tr>th , .tripsTable>tbody>tr>td
+{
+	width: 30%;
+}
+
 th
 {
 	background-color: #7A96C5;
